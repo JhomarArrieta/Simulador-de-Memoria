@@ -1,0 +1,6 @@
+# Prueba 1: ejemplo del enunciado
+alloc 8192
+write 0 42
+write 4096 99
+read 0
+read 4096

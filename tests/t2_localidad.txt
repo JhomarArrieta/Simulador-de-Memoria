@@ -1,0 +1,63 @@
+# Prueba 2: localidad temporal y espacial (pocas paginas, muchos accesos)
+alloc 65536
+write 0 0
+read 0
+read 16
+write 4096 1
+read 4096
+read 4112
+write 8192 2
+read 8192
+read 8208
+write 12288 3
+read 12288
+read 12304
+write 8 10
+read 8
+read 16
+write 4104 11
+read 4104
+read 4112
+write 8200 12
+read 8200
+read 8208
+write 12296 13
+read 12296
+read 12304
+write 16 20
+read 16
+read 16
+write 4112 21
+read 4112
+read 4112
+write 8208 22
+read 8208
+read 8208
+write 12304 23
+read 12304
+read 12304
+write 24 30
+read 24
+read 16
+write 4120 31
+read 4120
+read 4112
+write 8216 32
+read 8216
+read 8208
+write 12312 33
+read 12312
+read 12304
+write 32 40
+read 32
+read 16
+write 4128 41
+read 4128
+read 4112
+write 8224 42
+read 8224
+read 8208
+write 12320 43
+read 12320
+read 12304
+free 0

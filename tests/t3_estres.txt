@@ -1,0 +1,402 @@
+# Prueba 3: barrido ciclico de 100 paginas (peor caso de FIFO y LRU con 64 marcos)
+alloc 409600
+write 0 0
+read 0
+write 4096 1
+read 4096
+write 8192 2
+read 8192
+write 12288 3
+read 12288
+write 16384 4
+read 16384
+write 20480 5
+read 20480
+write 24576 6
+read 24576
+write 28672 7
+read 28672
+write 32768 8
+read 32768
+write 36864 9
+read 36864
+write 40960 10
+read 40960
+write 45056 11
+read 45056
+write 49152 12
+read 49152
+write 53248 13
+read 53248
+write 57344 14
+read 57344
+write 61440 15
+read 61440
+write 65536 16
+read 65536
+write 69632 17
+read 69632
+write 73728 18
+read 73728
+write 77824 19
+read 77824
+write 81920 20
+read 81920
+write 86016 21
+read 86016
+write 90112 22
+read 90112
+write 94208 23
+read 94208
+write 98304 24
+read 98304
+write 102400 25
+read 102400
+write 106496 26
+read 106496
+write 110592 27
+read 110592
+write 114688 28
+read 114688
+write 118784 29
+read 118784
+write 122880 30
+read 122880
+write 126976 31
+read 126976
+write 131072 32
+read 131072
+write 135168 33
+read 135168
+write 139264 34
+read 139264
+write 143360 35
+read 143360
+write 147456 36
+read 147456
+write 151552 37
+read 151552
+write 155648 38
+read 155648
+write 159744 39
+read 159744
+write 163840 40
+read 163840
+write 167936 41
+read 167936
+write 172032 42
+read 172032
+write 176128 43
+read 176128
+write 180224 44
+read 180224
+write 184320 45
+read 184320
+write 188416 46
+read 188416
+write 192512 47
+read 192512
+write 196608 48
+read 196608
+write 200704 49
+read 200704
+write 204800 50
+read 204800
+write 208896 51
+read 208896
+write 212992 52
+read 212992
+write 217088 53
+read 217088
+write 221184 54
+read 221184
+write 225280 55
+read 225280
+write 229376 56
+read 229376
+write 233472 57
+read 233472
+write 237568 58
+read 237568
+write 241664 59
+read 241664
+write 245760 60
+read 245760
+write 249856 61
+read 249856
+write 253952 62
+read 253952
+write 258048 63
+read 258048
+write 262144 64
+read 262144
+write 266240 65
+read 266240
+write 270336 66
+read 270336
+write 274432 67
+read 274432
+write 278528 68
+read 278528
+write 282624 69
+read 282624
+write 286720 70
+read 286720
+write 290816 71
+read 290816
+write 294912 72
+read 294912
+write 299008 73
+read 299008
+write 303104 74
+read 303104
+write 307200 75
+read 307200
+write 311296 76
+read 311296
+write 315392 77
+read 315392
+write 319488 78
+read 319488
+write 323584 79
+read 323584
+write 327680 80
+read 327680
+write 331776 81
+read 331776
+write 335872 82
+read 335872
+write 339968 83
+read 339968
+write 344064 84
+read 344064
+write 348160 85
+read 348160
+write 352256 86
+read 352256
+write 356352 87
+read 356352
+write 360448 88
+read 360448
+write 364544 89
+read 364544
+write 368640 90
+read 368640
+write 372736 91
+read 372736
+write 376832 92
+read 376832
+write 380928 93
+read 380928
+write 385024 94
+read 385024
+write 389120 95
+read 389120
+write 393216 96
+read 393216
+write 397312 97
+read 397312
+write 401408 98
+read 401408
+write 405504 99
+read 405504
+write 0 0
+read 0
+write 4096 1
+read 4096
+write 8192 2
+read 8192
+write 12288 3
+read 12288
+write 16384 4
+read 16384
+write 20480 5
+read 20480
+write 24576 6
+read 24576
+write 28672 7
+read 28672
+write 32768 8
+read 32768
+write 36864 9
+read 36864
+write 40960 10
+read 40960
+write 45056 11
+read 45056
+write 49152 12
+read 49152
+write 53248 13
+read 53248
+write 57344 14
+read 57344
+write 61440 15
+read 61440
+write 65536 16
+read 65536
+write 69632 17
+read 69632
+write 73728 18
+read 73728
+write 77824 19
+read 77824
+write 81920 20
+read 81920
+write 86016 21
+read 86016
+write 90112 22
+read 90112
+write 94208 23
+read 94208
+write 98304 24
+read 98304
+write 102400 25
+read 102400
+write 106496 26
+read 106496
+write 110592 27
+read 110592
+write 114688 28
+read 114688
+write 118784 29
+read 118784
+write 122880 30
+read 122880
+write 126976 31
+read 126976
+write 131072 32
+read 131072
+write 135168 33
+read 135168
+write 139264 34
+read 139264
+write 143360 35
+read 143360
+write 147456 36
+read 147456
+write 151552 37
+read 151552
+write 155648 38
+read 155648
+write 159744 39
+read 159744
+write 163840 40
+read 163840
+write 167936 41
+read 167936
+write 172032 42
+read 172032
+write 176128 43
+read 176128
+write 180224 44
+read 180224
+write 184320 45
+read 184320
+write 188416 46
+read 188416
+write 192512 47
+read 192512
+write 196608 48
+read 196608
+write 200704 49
+read 200704
+write 204800 50
+read 204800
+write 208896 51
+read 208896
+write 212992 52
+read 212992
+write 217088 53
+read 217088
+write 221184 54
+read 221184
+write 225280 55
+read 225280
+write 229376 56
+read 229376
+write 233472 57
+read 233472
+write 237568 58
+read 237568
+write 241664 59
+read 241664
+write 245760 60
+read 245760
+write 249856 61
+read 249856
+write 253952 62
+read 253952
+write 258048 63
+read 258048
+write 262144 64
+read 262144
+write 266240 65
+read 266240
+write 270336 66
+read 270336
+write 274432 67
+read 274432
+write 278528 68
+read 278528
+write 282624 69
+read 282624
+write 286720 70
+read 286720
+write 290816 71
+read 290816
+write 294912 72
+read 294912
+write 299008 73
+read 299008
+write 303104 74
+read 303104
+write 307200 75
+read 307200
+write 311296 76
+read 311296
+write 315392 77
+read 315392
+write 319488 78
+read 319488
+write 323584 79
+read 323584
+write 327680 80
+read 327680
+write 331776 81
+read 331776
+write 335872 82
+read 335872
+write 339968 83
+read 339968
+write 344064 84
+read 344064
+write 348160 85
+read 348160
+write 352256 86
+read 352256
+write 356352 87
+read 356352
+write 360448 88
+read 360448
+write 364544 89
+read 364544
+write 368640 90
+read 368640
+write 372736 91
+read 372736
+write 376832 92
+read 376832
+write 380928 93
+read 380928
+write 385024 94
+read 385024
+write 389120 95
+read 389120
+write 393216 96
+read 393216
+write 397312 97
+read 397312
+write 401408 98
+read 401408
+write 405504 99
+read 405504

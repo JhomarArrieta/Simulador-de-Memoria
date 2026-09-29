@@ -1,0 +1,5 @@
+# Artefactos de compilacion
+build/
+simulador
+*.o
+*.d
