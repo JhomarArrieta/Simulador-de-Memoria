@@ -4,12 +4,6 @@
 simulador
 build/
 
-# Archivos de trabajo con Claude Code
-CLAUDE.md
-PROMPTS.md
-.claude/
-.claude.json
-
 # Editor y sistema operativo
 .vscode/
 .idea/
