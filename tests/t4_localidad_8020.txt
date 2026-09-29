@@ -1,0 +1,5002 @@
+# Prueba 4: localidad 80/20 con presion de memoria (100 paginas, 20 calientes, 5000 accesos)
+alloc 409600
+write 43972 0
+read 16284
+read 20916
+write 230380 3
+read 24996
+write 68552 5
+read 11724
+write 37820 7
+read 81572
+read 63992
+read 21920
+write 6260 11
+write 25364 12
+read 258412
+read 58108
+read 146160
+read 58072
+write 110712 17
+read 29692
+read 12220
+read 23208
+read 36540
+read 187572
+read 48440
+read 25848
+read 53504
+read 2868
+read 74240
+read 33764
+read 73800
+read 254468
+write 67140 31
+read 25612
+write 49988 33
+read 146068
+write 9656 35
+read 16204
+read 42964
+read 30344
+read 29116
+read 1436
+read 73368
+write 18472 42
+read 348096
+write 56900 44
+write 81820 45
+write 2220 46
+write 15536 47
+read 27628
+read 272184
+write 243548 50
+read 14628
+read 29580
+write 51236 53
+read 53868
+read 1880
+read 254124
+read 38364
+read 360096
+read 58412
+read 39468
+read 73576
+write 69732 62
+read 42620
+write 47596 64
+read 69512
+read 36788
+read 28632
+read 24864
+read 76772
+write 37092 70
+read 35760
+read 36004
+write 68856 73
+read 54196
+read 49640
+read 10380
+write 73840 77
+read 56712
+write 63008 79
+write 28824 80
+read 12496
+read 7664
+write 65484 83
+read 22644
+read 35164
+read 54676
+read 27524
+read 222956
+read 35844
+write 288836 90
+read 258856
+write 33376 92
+read 76804
+read 26464
+read 19412
+read 15640
+read 392744
+read 22776
+write 357860 99
+read 27360
+read 62540
+read 91720
+read 271436
+read 321116
+read 4916
+write 24612 106
+read 22972
+write 35964 108
+read 159156
+read 2176
+read 11800
+write 63568 112
+write 8152 113
+read 370948
+read 58460
+read 78116
+read 347232
+write 29380 118
+write 72756 119
+read 70632
+read 25512
+read 28664
+read 52364
+read 27152
+read 280336
+read 78856
+read 66548
+read 5688
+write 187824 129
+read 67260
+read 2640
+write 18940 132
+read 39008
+read 147888
+read 34184
+write 327552 136
+read 66096
+write 22260 138
+write 11756 139
+write 60784 140
+write 6900 141
+read 21452
+read 5740
+write 35372 144
+read 77240
+read 50896
+read 39648
+write 35572 148
+read 68352
+write 325380 150
+write 65632 151
+read 58928
+read 81452
+read 62732
+read 2740
+read 191008
+read 68596
+read 79736
+write 33124 159
+write 363144 160
+write 19432 161
+read 59372
+write 35308 163
+read 76112
+read 28512
+read 103140
+read 76540
+write 282732 168
+write 3992 169
+write 69824 170
+write 76216 171
+read 68052
+read 120732
+write 376 174
+write 7352 175
+write 42396 176
+read 25260
+read 38076
+read 12620
+read 35028
+read 20956
+read 67320
+write 63656 183
+write 71132 184
+read 297460
+read 53388
+read 29500
+write 7024 188
+read 14300
+write 41692 190
+read 38816
+write 71004 192
+read 44268
+read 55008
+write 313032 195
+read 78296
+read 32560
+read 59876
+read 12460
+read 74496
+write 50564 201
+read 39488
+read 78640
+write 16072 204
+read 381312
+read 41164
+read 11812
+read 56904
+read 69916
+write 16460 210
+read 79544
+write 49824 212
+write 28720 213
+read 188132
+write 14764 215
+write 32128 216
+read 36888
+write 17376 218
+read 45796
+write 16536 220
+read 66840
+read 34084
+write 15728 223
+write 48532 224
+write 532 225
+write 3616 226
+read 21440
+write 55160 228
+read 916
+read 19768
+read 79804
+read 10048
+read 17880
+write 53664 234
+read 65224
+write 27072 236
+read 63484
+write 53424 238
+write 1756 239
+write 32532 240
+read 54252
+read 14924
+write 19656 243
+write 60124 244
+read 40524
+read 47324
+write 382860 247
+read 78232
+write 7540 249
+read 5296
+write 19840 251
+write 13204 252
+read 45172
+write 30340 254
+read 31776
+read 62300
+read 59760
+read 305892
+read 1896
+read 20156
+write 35956 261
+read 1380
+read 9396
+write 28416 264
+write 35364 265
+read 16836
+write 113288 267
+write 74572 268
+read 18228
+write 224848 270
+read 20424
+write 50248 272
+write 12288 273
+read 30160
+read 23184
+write 9864 276
+read 246304
+write 237444 278
+write 1856 279
+read 23820
+read 404440
+read 70392
+write 27820 283
+read 63136
+write 39024 285
+read 76784
+read 252556
+read 227016
+write 63024 289
+read 39804
+read 175296
+write 279748 292
+read 51536
+write 153820 294
+write 49144 295
+write 44972 296
+read 70840
+write 71300 298
+read 298644
+read 387680
+write 14412 301
+read 9708
+write 75444 303
+read 456
+read 45324
+read 16152
+read 111992
+write 149348 308
+read 112456
+write 257356 310
+read 338344
+write 18132 312
+read 46488
+read 62084
+write 69500 315
+read 53788
+read 52816
+read 63100
+write 76668 319
+write 27708 320
+write 41556 321
+read 189384
+read 1504
+read 300004
+write 64568 325
+write 29444 326
+read 36860
+read 55116
+read 63776
+read 46708
+write 42188 331
+write 79232 332
+read 44700
+write 389556 334
+read 76064
+read 68988
+read 53532
+read 14948
+read 305996
+read 288728
+read 56428
+read 28384
+write 289468 343
+read 28464
+write 46936 345
+read 103300
+read 379136
+read 56712
+read 122028
+read 367000
+read 5640
+write 70440 352
+write 58108 353
+write 307044 354
+write 38164 355
+read 59732
+read 76012
+write 30976 358
+read 45688
+read 271032
+write 24584 361
+read 17836
+read 37704
+read 7428
+read 161972
+read 49972
+read 30424
+read 166968
+read 8492
+read 356848
+write 61716 371
+write 39904 372
+write 69148 373
+read 3000
+read 85944
+read 257812
+write 45360 377
+read 287088
+write 56008 379
+write 157168 380
+read 75324
+write 32692 382
+write 54784 383
+read 102632
+read 36160
+read 380212
+read 330052
+read 12292
+write 27192 389
+write 11128 390
+read 81304
+write 81764 392
+read 31840
+write 10648 394
+read 6388
+write 62180 396
+read 62816
+read 223948
+read 13284
+read 22664
+write 77096 401
+read 7704
+write 7900 403
+read 3744
+read 330656
+write 69776 406
+read 40876
+read 50840
+read 109296
+write 381980 410
+write 223172 411
+write 52800 412
+read 9092
+read 39012
+write 40452 415
+write 62588 416
+read 343572
+write 5760 418
+read 7116
+write 59712 420
+read 68564
+write 35504 422
+write 17124 423
+read 80464
+read 21212
+read 77712
+read 18416
+read 111384
+read 61668
+read 230600
+read 350952
+read 69256
+read 59864
+read 70860
+read 30780
+read 233164
+read 267944
+read 21740
+read 68484
+read 317256
+read 101452
+read 47656
+read 29788
+write 51884 444
+read 12852
+write 76768 446
+read 241668
+write 284752 448
+read 33764
+read 154196
+read 89360
+read 1744
+read 63300
+read 60048
+write 23372 455
+write 71984 456
+read 54888
+read 6488
+read 15720
+write 45216 460
+read 19852
+read 53552
+read 67032
+write 53032 464
+read 113120
+read 44760
+write 395564 467
+read 46108
+read 46352
+read 33824
+read 192656
+read 13388
+read 40096
+write 277996 474
+write 8276 475
+read 250276
+write 159944 477
+write 3516 478
+read 141916
+write 8684 480
+read 18840
+write 27044 482
+write 180908 483
+read 257156
+write 24716 485
+write 62324 486
+read 69800
+read 43872
+write 50324 489
+read 40236
+read 404132
+read 230600
+read 37276
+write 77464 494
+write 24940 495
+read 363204
+read 369768
+read 249308
+read 40228
+read 59656
+read 60972
+read 26856
+read 58364
+read 171692
+read 43032
+write 56592 506
+read 47796
+read 77368
+read 37144
+read 29392
+read 14148
+write 37256 512
+read 62356
+write 80004 514
+read 258536
+read 7192
+read 387312
+write 14148 518
+read 60904
+read 5948
+read 24480
+read 6008
+read 64908
+read 47600
+write 356292 525
+read 17472
+read 102400
+read 14296
+read 395040
+write 269964 530
+read 362572
+read 61364
+read 9156
+read 20052
+write 228052 535
+write 32416 536
+read 369132
+read 69360
+read 18464
+read 71212
+read 44460
+write 2740 542
+read 68544
+read 5568
+write 28484 545
+write 66724 546
+read 476
+read 49592
+read 3484
+write 51840 550
+write 42084 551
+read 38596
+read 65780
+read 44180
+write 334716 555
+write 66116 556
+read 78372
+read 10596
+write 66932 559
+read 32692
+read 45896
+read 144184
+read 66864
+write 16936 564
+write 4004 565
+read 216
+read 19480
+read 52356
+read 44404
+read 22900
+read 23496
+write 21192 572
+read 21520
+write 53556 574
+read 148184
+write 228640 576
+read 32728
+read 80872
+write 4184 579
+read 80812
+read 56380
+read 59168
+write 156 583
+read 52736
+read 42932
+write 74776 586
+write 25296 587
+write 13156 588
+read 52300
+read 69152
+read 72840
+write 17996 592
+read 36732
+read 8880
+read 53088
+read 112964
+write 53888 597
+read 13788
+write 38980 599
+write 74128 600
+read 81596
+read 62904
+read 24680
+write 288556 604
+read 41248
+read 245352
+read 31336
+read 27860
+read 872
+read 36616
+read 104708
+read 69684
+write 69156 613
+write 197420 614
+read 43756
+read 66508
+read 3052
+read 53380
+read 253568
+read 30332
+read 37084
+read 55324
+read 20384
+write 25280 624
+read 56584
+read 59388
+read 153196
+write 60112 628
+read 66528
+read 3616
+read 30720
+read 7956
+read 25600
+read 46008
+read 23228
+read 190596
+read 11652
+read 49128
+read 79672
+read 38692
+read 32164
+read 56384
+read 312080
+read 285184
+read 17508
+write 80136 646
+write 53232 647
+write 18124 648
+write 103100 649
+write 267564 650
+write 29432 651
+write 307312 652
+write 32604 653
+read 5444
+read 1732
+write 96132 656
+read 64396
+read 150432
+read 120488
+read 136
+read 3728
+write 52708 662
+read 60760
+read 20280
+write 71760 665
+read 262248
+read 2388
+write 6948 668
+write 70744 669
+write 6160 670
+read 11316
+read 73160
+read 58708
+write 39740 674
+read 51620
+read 72100
+read 2536
+read 32640
+read 13400
+read 5800
+read 21104
+write 30296 682
+write 4796 683
+read 204532
+write 17900 685
+read 54024
+write 6900 687
+write 21132 688
+read 326220
+write 61688 690
+read 15736
+read 52192
+write 67836 693
+read 59924
+read 25660
+read 25764
+write 233668 697
+read 74180
+read 7680
+read 66636
+write 53540 701
+read 90028
+read 400268
+read 54136
+read 32524
+read 39956
+write 65088 707
+read 72612
+read 56088
+read 9248
+write 32976 711
+read 35896
+read 67472
+write 13640 714
+read 351500
+read 68844
+read 72524
+read 63236
+read 212908
+read 32360
+read 15852
+write 215740 722
+write 403592 723
+read 78940
+read 78252
+read 56300
+write 57604 727
+read 6436
+read 46548
+read 323656
+read 141528
+read 396628
+write 49580 733
+write 70920 734
+read 23528
+write 13400 736
+read 57240
+write 10996 738
+read 45156
+read 53888
+read 38400
+write 5436 742
+read 31416
+write 214840 744
+read 69276
+read 66320
+read 35760
+read 386872
+write 14128 749
+read 40452
+write 464 751
+read 141656
+write 19840 753
+read 9332
+read 34268
+read 43028
+read 43868
+read 18940
+write 75524 759
+write 49796 760
+read 255904
+write 126432 762
+read 13368
+read 57224
+write 50384 765
+write 157536 766
+write 227288 767
+write 139860 768
+read 350848
+write 23384 770
+read 30700
+read 50624
+write 76872 773
+read 68548
+read 69260
+write 58732 776
+read 62832
+read 2420
+read 17044
+read 47580
+write 154872 781
+read 205008
+write 100584 783
+write 30784 784
+read 39112
+read 19840
+read 316028
+read 29864
+read 57684
+read 185420
+read 51404
+write 472 792
+read 193188
+write 21076 794
+write 33000 795
+write 6228 796
+read 21128
+read 104980
+write 66516 799
+write 64608 800
+read 29284
+read 80780
+read 52732
+read 3192
+read 22104
+write 27084 806
+read 340552
+read 2664
+read 215680
+write 3284 810
+read 264792
+write 22576 812
+read 3496
+read 73972
+read 11628
+read 39020
+write 62692 817
+read 38856
+write 64524 819
+write 23140 820
+write 164696 821
+read 115028
+read 47200
+write 75768 824
+read 81612
+read 35788
+write 59888 827
+read 43684
+write 14512 829
+write 35280 830
+write 5136 831
+read 48016
+read 18980
+read 22208
+read 197664
+read 356328
+write 78808 837
+write 45508 838
+read 16952
+read 71004
+read 2092
+read 15204
+write 5440 843
+write 21748 844
+read 118288
+write 20160 846
+read 9724
+write 235012 848
+read 52376
+read 355584
+read 59208
+read 76812
+read 287120
+read 9400
+read 75420
+write 5380 856
+write 22904 857
+read 40224
+read 62064
+read 4560
+write 298768 861
+write 272 862
+read 211272
+write 373032 864
+read 1460
+write 52872 866
+read 80828
+read 16348
+read 69876
+read 25832
+write 62072 871
+read 180632
+read 23564
+write 161332 874
+write 37520 875
+read 45004
+read 21712
+read 65196
+write 99692 879
+write 77684 880
+write 4688 881
+read 58968
+read 55676
+read 45544
+read 34656
+write 71000 886
+read 40572
+write 11208 888
+read 10892
+write 297588 890
+write 30968 891
+read 29588
+read 264476
+read 343792
+write 24348 895
+read 14064
+write 33752 897
+read 36712
+read 239884
+read 65724
+read 38192
+write 17468 902
+write 23844 903
+write 65508 904
+write 6004 905
+read 56168
+read 34696
+read 189668
+read 179128
+write 19488 910
+read 46716
+write 35940 912
+read 10016
+read 159872
+write 46084 915
+read 25268
+write 57384 917
+read 263416
+read 7656
+read 170468
+write 50224 921
+read 37396
+read 38212
+write 65124 924
+read 72904
+read 38992
+write 400884 927
+read 47792
+write 7172 929
+read 35328
+read 78292
+read 75584
+read 61708
+read 39620
+read 44220
+read 75240
+read 20720
+read 81908
+read 53124
+read 38976
+write 38768 941
+read 81564
+read 59704
+read 37824
+write 38064 945
+write 145712 946
+read 63328
+write 74140 948
+write 55956 949
+write 15128 950
+read 55736
+read 120
+read 40244
+read 7984
+read 213672
+read 48780
+read 66916
+read 44800
+read 78872
+read 56760
+read 81652
+write 75920 962
+read 14328
+write 12520 964
+read 75344
+write 51596 966
+read 54176
+read 14280
+read 2620
+write 124108 970
+read 57568
+read 40168
+read 11872
+read 34484
+read 36256
+read 55856
+write 6508 977
+read 41104
+read 31312
+write 64624 980
+read 50008
+read 65872
+read 381296
+read 41940
+read 16772
+read 50380
+read 53824
+read 9236
+read 29116
+read 20672
+read 19976
+read 48008
+read 294560
+read 2596
+read 31404
+read 14452
+read 34828
+read 39856
+read 246860
+read 5188
+read 26308
+write 39428 1002
+write 7540 1003
+write 5248 1004
+read 15612
+write 43060 1006
+read 37576
+write 54676 1008
+read 25720
+read 81084
+write 16332 1011
+read 264120
+write 78872 1013
+read 1408
+read 48812
+read 39540
+read 23188
+write 76780 1018
+read 26728
+read 69420
+read 61580
+write 77304 1022
+read 17124
+read 26908
+read 24616
+read 4164
+read 39944
+read 61236
+read 59976
+read 27332
+read 160416
+read 62076
+read 69356
+write 27952 1034
+read 49408
+read 41444
+write 38432 1037
+read 7664
+read 1188
+read 190036
+read 104372
+read 50500
+read 30232
+write 20604 1044
+read 2240
+write 120348 1046
+write 24216 1047
+read 37064
+read 398296
+read 5140
+read 4152
+read 26668
+read 65404
+read 38564
+write 44596 1055
+write 56920 1056
+write 55996 1057
+write 79824 1058
+read 69204
+write 27096 1060
+write 353072 1061
+read 236232
+write 56056 1063
+read 33412
+read 73700
+read 49092
+read 9792
+read 68680
+read 37248
+read 77524
+read 21176
+write 53276 1072
+write 78284 1073
+write 311316 1074
+read 161192
+write 48784 1076
+read 66392
+write 25176 1078
+read 64932
+write 14020 1080
+read 11496
+read 49988
+read 40796
+read 36532
+read 44560
+write 249576 1086
+read 9712
+read 321100
+write 56548 1089
+read 28168
+read 25360
+read 25608
+read 97004
+write 41660 1094
+write 4792 1095
+read 12164
+read 73348
+read 318928
+read 42408
+read 22392
+read 374096
+write 52936 1102
+read 44272
+read 55108
+read 39680
+write 31232 1106
+read 18780
+read 38056
+read 80404
+read 4084
+read 31368
+read 16188
+read 169176
+read 108880
+write 72344 1115
+read 15716
+read 23252
+read 352596
+write 140300 1119
+write 41256 1120
+read 62396
+read 100728
+write 36728 1123
+read 46796
+read 41848
+read 355396
+read 8924
+read 13064
+read 50260
+read 155484
+read 46892
+read 45692
+read 468
+write 380412 1134
+read 207800
+read 41680
+write 65216 1137
+read 80068
+write 80812 1139
+read 43772
+write 72224 1141
+read 88400
+read 57152
+read 70580
+read 247696
+read 43868
+read 56216
+read 298304
+read 55536
+read 187680
+read 15420
+read 8400
+read 290328
+write 34576 1154
+read 376944
+write 61560 1156
+write 82164 1157
+write 63864 1158
+read 39344
+read 6632
+write 31580 1161
+read 2216
+write 4520 1163
+read 46048
+read 9236
+read 15676
+read 70416
+write 560 1168
+read 59328
+write 31828 1170
+read 71304
+read 91868
+read 80940
+write 78992 1174
+write 48088 1175
+write 26644 1176
+read 55136
+read 57760
+read 16820
+read 50572
+write 46652 1181
+write 64756 1182
+read 78448
+read 289880
+read 20884
+read 62292
+read 17992
+read 65424
+read 59752
+write 154220 1190
+write 50396 1191
+write 268752 1192
+read 46692
+read 45112
+write 77660 1195
+write 77472 1196
+read 97320
+read 30252
+read 1864
+write 217416 1200
+write 45820 1201
+read 2408
+read 30660
+read 233724
+write 10052 1205
+read 47516
+write 55920 1207
+read 73508
+read 151616
+write 76860 1210
+read 15644
+read 14840
+read 40488
+read 17184
+write 73468 1215
+read 43896
+read 33928
+read 13340
+read 383432
+write 3532 1220
+read 71084
+write 55160 1222
+read 35980
+read 51136
+read 112464
+read 21676
+write 214192 1227
+read 51136
+read 26036
+read 21584
+write 53556 1231
+read 323960
+read 74240
+read 22744
+read 27896
+write 33744 1236
+read 76824
+read 660
+read 78132
+read 8368
+write 21424 1241
+read 29360
+write 66352 1243
+read 26020
+read 63460
+read 79424
+write 120236 1247
+read 174832
+read 293100
+read 70832
+read 67184
+write 50548 1252
+write 21344 1253
+read 300488
+read 336396
+read 36912
+read 68772
+read 40436
+write 299780 1259
+write 31020 1260
+write 26040 1261
+read 72424
+read 51808
+read 10952
+read 7552
+read 25704
+read 34196
+read 13932
+write 7096 1269
+read 7900
+read 10320
+write 347976 1272
+read 77244
+write 182992 1274
+read 43712
+read 22228
+read 22696
+read 39108
+write 228848 1279
+read 253988
+write 16524 1281
+read 61736
+write 60540 1283
+read 40228
+read 74964
+read 16556
+read 23256
+write 35316 1288
+write 47460 1289
+read 71412
+write 142024 1291
+read 32368
+read 19188
+read 59400
+read 308968
+write 41144 1296
+read 307524
+read 19048
+read 263332
+write 32212 1300
+read 307056
+write 31560 1302
+read 11204
+read 11424
+read 56272
+read 355348
+read 16368
+write 317472 1308
+read 54016
+read 38648
+read 38360
+write 16116 1312
+read 408816
+write 11380 1314
+read 51964
+write 200884 1316
+read 32616
+write 240976 1318
+read 16936
+write 30364 1320
+write 365944 1321
+write 226484 1322
+read 41120
+read 50160
+write 45556 1325
+read 18908
+write 65320 1327
+read 95720
+write 376420 1329
+read 26696
+read 40176
+read 25816
+read 69044
+read 40056
+read 59416
+read 40660
+read 247444
+read 282336
+read 29056
+read 3136
+write 17732 1341
+write 97548 1342
+read 251092
+read 14312
+read 27204
+read 39268
+read 7620
+read 80276
+write 81636 1349
+write 53504 1350
+read 78460
+read 76112
+read 341408
+read 106136
+read 55236
+read 58544
+read 200164
+read 77796
+read 361152
+read 80932
+write 57460 1361
+read 26388
+write 57936 1363
+read 22988
+read 44264
+read 76040
+read 22092
+write 95108 1368
+read 5740
+read 61536
+write 60916 1371
+read 32628
+read 44336
+write 54796 1374
+read 13024
+read 28548
+read 12176
+read 197320
+read 193652
+write 55228 1380
+write 323772 1381
+read 61792
+read 76408
+read 78584
+read 16260
+write 21352 1386
+write 10612 1387
+read 46412
+read 67716
+write 332396 1390
+read 32864
+read 58776
+read 317512
+read 49880
+write 56004 1395
+write 370004 1396
+read 4436
+read 33160
+read 165824
+read 13708
+write 74968 1401
+read 30620
+read 76652
+read 31360
+write 58748 1405
+read 76528
+write 416 1407
+read 73576
+read 25048
+write 18048 1410
+read 51704
+read 26352
+read 32
+read 69312
+write 75032 1415
+read 19700
+read 41688
+read 21852
+read 63540
+write 53740 1420
+write 65036 1421
+read 5684
+read 19012
+read 37068
+read 58956
+read 64652
+read 76976
+write 65820 1428
+write 215576 1429
+write 63320 1430
+read 12232
+write 28568 1432
+write 20048 1433
+read 228756
+read 10084
+read 20332
+write 373672 1437
+read 19132
+read 45116
+read 44356
+read 67600
+read 211416
+write 12428 1443
+write 71940 1444
+read 40304
+write 178172 1446
+write 51180 1447
+read 41112
+read 71916
+read 21164
+read 63008
+read 288440
+read 67316
+write 7224 1454
+write 21640 1455
+write 78440 1456
+read 49648
+read 47668
+read 76564
+write 378592 1460
+read 291688
+read 42596
+read 78344
+write 43312 1464
+read 80668
+write 25300 1466
+read 21732
+read 31824
+read 38812
+write 30216 1470
+read 30296
+read 5908
+read 14452
+read 43092
+read 76720
+read 75412
+write 135776 1477
+read 64500
+write 22448 1479
+read 7912
+read 64336
+read 308844
+read 66416
+read 243484
+read 5592
+read 178716
+write 58756 1487
+read 15396
+write 51172 1489
+write 151720 1490
+read 74452
+read 67976
+write 31024 1493
+write 896 1494
+read 331936
+read 110200
+write 333956 1497
+write 49084 1498
+write 49120 1499
+write 19852 1500
+read 323144
+read 72844
+write 113188 1503
+read 201272
+write 38784 1505
+read 16180
+write 51780 1507
+read 60000
+read 315948
+write 6480 1510
+read 18376
+read 39508
+read 239476
+read 66972
+read 32604
+read 4444
+read 60700
+write 32372 1518
+write 64748 1519
+read 71352
+read 52924
+read 27264
+read 46596
+write 70244 1524
+read 65672
+read 14004
+read 16064
+read 61412
+read 27232
+read 59336
+read 56088
+write 354448 1532
+write 22472 1533
+write 16460 1534
+read 20720
+read 16224
+read 6688
+read 19668
+read 69896
+read 55636
+read 20748
+read 27128
+write 173976 1543
+read 66256
+read 8624
+read 115264
+write 102144 1547
+read 74488
+write 72300 1549
+read 65540
+read 3620
+read 328692
+read 76980
+write 10256 1554
+write 390000 1555
+write 64376 1556
+read 46076
+write 53756 1558
+read 15300
+read 23880
+read 39712
+read 70644
+write 78020 1563
+write 28060 1564
+read 21960
+read 18536
+write 17024 1567
+write 390100 1568
+read 136220
+write 35240 1570
+read 70704
+read 8112
+write 64436 1573
+write 55728 1574
+write 68508 1575
+read 56088
+write 19636 1577
+write 75776 1578
+read 156532
+write 34296 1580
+write 39344 1581
+write 105892 1582
+write 9856 1583
+read 45348
+read 27072
+read 319768
+read 11792
+read 245420
+read 39860
+read 65796
+read 314060
+read 58136
+write 3828 1593
+write 792 1594
+read 36340
+read 27052
+read 77084
+write 14660 1598
+write 57720 1599
+read 126264
+read 35496
+read 48056
+read 1152
+write 38208 1604
+read 8852
+write 32688 1606
+write 70304 1607
+read 81144
+read 276
+read 46552
+read 37024
+write 306056 1612
+read 76888
+read 8484
+write 22972 1615
+read 61648
+read 370732
+read 39824
+read 64052
+read 24372
+write 48180 1621
+write 64952 1622
+write 71024 1623
+write 58632 1624
+write 58712 1625
+write 44880 1626
+write 27352 1627
+read 55488
+read 60
+write 10704 1630
+write 49376 1631
+read 236544
+write 23396 1633
+write 29052 1634
+write 33924 1635
+read 100064
+read 18636
+write 29572 1638
+read 45572
+read 42552
+write 149952 1641
+read 56284
+read 24904
+read 66228
+read 149272
+write 33472 1646
+read 175124
+write 3924 1648
+read 27200
+write 366632 1650
+read 212152
+read 34176
+read 68204
+write 40208 1654
+read 122228
+read 14148
+read 56616
+read 70240
+read 15104
+read 353784
+read 49632
+write 43040 1662
+read 159720
+read 237384
+read 180996
+write 103500 1666
+read 93208
+write 10864 1668
+read 58736
+read 27184
+read 78104
+read 52296
+read 240208
+read 67528
+read 119872
+read 45316
+read 77652
+read 56804
+read 81616
+read 32992
+write 8644 1681
+write 12612 1682
+read 52652
+read 76152
+write 19592 1685
+read 59176
+read 1848
+write 78500 1688
+read 49264
+read 53092
+write 18000 1691
+read 73668
+read 26648
+read 40796
+read 27992
+read 38132
+read 34232
+read 16748
+read 323612
+write 78588 1700
+read 22476
+read 7672
+read 8596
+write 36884 1704
+read 9944
+read 64900
+write 312280 1707
+read 378776
+read 57016
+read 78640
+read 5568
+read 36060
+read 241300
+read 161372
+read 32704
+read 48336
+write 16724 1717
+write 223748 1718
+read 23672
+write 26896 1720
+read 71300
+read 27924
+read 73792
+write 198412 1724
+read 21796
+read 373436
+read 60980
+write 59488 1728
+read 67116
+write 339856 1730
+read 10036
+write 66732 1732
+read 8728
+read 49768
+read 16696
+read 17624
+read 46328
+write 67468 1738
+read 53388
+read 54112
+write 1460 1741
+write 396880 1742
+write 79832 1743
+read 5272
+read 21896
+read 91684
+read 40952
+write 80328 1748
+read 4184
+read 1712
+write 266940 1751
+write 8408 1752
+write 21596 1753
+read 402164
+write 79072 1755
+read 374184
+read 64228
+read 292268
+write 38504 1759
+write 71968 1760
+write 19368 1761
+write 37620 1762
+write 31948 1763
+read 133596
+write 33524 1765
+read 8776
+read 162808
+read 58920
+read 37600
+read 49936
+read 75224
+read 43164
+read 41260
+write 7820 1774
+read 41044
+read 290132
+write 27176 1777
+read 46540
+read 255900
+write 19136 1780
+read 262568
+read 31264
+write 5740 1783
+read 46212
+read 71188
+read 77772
+read 48908
+write 10024 1788
+read 21372
+write 285996 1790
+write 18668 1791
+write 27720 1792
+write 29060 1793
+read 230604
+write 248040 1795
+write 61276 1796
+read 63652
+write 145704 1798
+read 79856
+read 279068
+write 55580 1801
+write 275136 1802
+read 15548
+write 20032 1804
+read 59940
+write 23348 1806
+read 17816
+write 354388 1808
+read 78572
+read 219836
+read 99940
+read 226644
+read 253396
+read 51360
+write 2164 1815
+write 79792 1816
+read 62168
+read 10272
+read 232828
+read 70312
+write 26296 1821
+read 45620
+read 29324
+write 7776 1824
+read 162104
+read 67316
+read 360596
+read 60592
+write 33760 1829
+read 81044
+read 40812
+read 73616
+read 47200
+read 60984
+write 39204 1835
+write 55136 1836
+read 12876
+read 32904
+read 261740
+read 12
+read 72280
+read 175600
+write 267172 1843
+write 124040 1844
+read 362124
+read 10916
+read 169040
+write 153756 1848
+read 8632
+write 65636 1850
+read 26000
+write 284352 1852
+read 97308
+read 189836
+write 80284 1855
+read 60876
+write 61440 1857
+write 47208 1858
+read 245636
+read 357280
+read 44376
+read 68664
+read 16116
+write 40424 1864
+read 46952
+read 81636
+read 38904
+read 24492
+read 27352
+read 52640
+read 76472
+write 48608 1872
+read 60516
+read 54040
+read 14692
+read 36704
+read 210696
+write 63000 1878
+read 29540
+read 21940
+read 367292
+read 41980
+read 8
+read 68980
+read 8964
+read 46724
+write 53052 1887
+write 297392 1888
+write 184336 1889
+read 26484
+write 198188 1891
+read 187020
+write 3144 1893
+read 79452
+write 72984 1895
+read 18576
+write 144216 1897
+write 74216 1898
+write 42468 1899
+read 18736
+read 7088
+write 329564 1902
+write 348408 1903
+read 37328
+write 70564 1905
+read 77328
+read 70308
+write 299924 1908
+write 62384 1909
+read 5276
+read 68660
+read 54496
+write 19144 1913
+read 1504
+write 79476 1915
+write 50048 1916
+write 11832 1917
+read 270116
+read 283008
+read 47372
+read 42744
+write 45012 1922
+write 342092 1923
+read 65204
+read 76896
+read 58092
+write 22728 1927
+read 5324
+read 311980
+read 296
+read 24460
+read 364524
+read 22840
+read 14348
+read 78228
+write 73928 1936
+read 14104
+write 287844 1938
+read 39104
+read 26704
+read 40936
+read 57428
+read 30152
+write 6128 1944
+read 55380
+read 11172
+read 76652
+write 53364 1948
+read 33020
+write 42444 1950
+write 38336 1951
+read 35180
+read 18200
+read 76772
+read 27388
+read 46952
+write 23360 1957
+read 65456
+write 267548 1959
+read 75884
+write 32756 1961
+read 13992
+read 147208
+write 4148 1964
+write 9976 1965
+write 40776 1966
+read 27088
+read 72820
+write 20756 1969
+write 84736 1970
+write 306048 1971
+read 28328
+write 41728 1973
+read 1120
+write 33932 1975
+read 72128
+read 298040
+read 63020
+read 57800
+write 100636 1980
+read 201220
+write 18124 1982
+read 33096
+read 17184
+read 263604
+read 333864
+read 17836
+read 56936
+write 30648 1989
+read 2740
+write 302272 1991
+read 8544
+read 860
+read 63300
+read 23104
+read 21820
+write 37744 1997
+read 3996
+read 2900
+read 71328
+read 128948
+write 45680 2002
+write 7492 2003
+read 47112
+read 66256
+read 21664
+read 47712
+write 45540 2008
+read 145200
+read 64352
+read 69400
+read 24324
+read 10244
+read 83584
+read 50060
+read 67368
+read 67716
+read 208008
+write 18192 2019
+write 276608 2020
+read 24188
+read 49224
+read 17780
+write 2084 2024
+read 43972
+write 54588 2026
+read 134504
+write 20872 2028
+read 221764
+read 57092
+read 44828
+read 203368
+read 30236
+read 3912
+read 5988
+write 72744 2036
+read 173308
+write 68756 2038
+read 19984
+read 57072
+read 181568
+write 363204 2042
+read 341096
+read 88876
+read 202388
+write 27344 2046
+write 46612 2047
+read 24236
+write 56400 2049
+read 9560
+write 4864 2051
+write 65816 2052
+read 321216
+read 11484
+read 79924
+write 13080 2056
+read 146244
+write 4472 2058
+read 314776
+read 6176
+read 60616
+read 40784
+write 4556 2063
+read 68488
+write 386104 2065
+read 18104
+read 3484
+read 36436
+read 51148
+read 18108
+read 3660
+read 53084
+read 71208
+read 35808
+write 138672 2075
+read 3476
+read 38032
+read 236688
+read 9684
+read 67096
+read 30708
+read 47428
+read 54080
+read 399096
+read 81560
+write 362724 2086
+read 226712
+read 352108
+read 40488
+write 47192 2090
+read 13204
+write 36028 2092
+write 46412 2093
+read 36516
+write 127612 2095
+read 31068
+write 119728 2097
+read 56672
+read 258088
+write 46120 2100
+write 36568 2101
+read 40968
+read 41824
+read 21632
+write 25448 2105
+write 80384 2106
+read 343128
+read 2204
+read 73760
+write 48716 2110
+write 31148 2111
+read 16104
+read 68724
+write 205436 2114
+write 73320 2115
+read 1272
+read 295632
+write 34776 2118
+write 21268 2119
+write 80992 2120
+read 73964
+read 8700
+read 209596
+read 52772
+write 31956 2125
+read 45880
+read 29156
+write 53524 2128
+write 76524 2129
+read 3664
+read 49592
+write 53840 2132
+read 232768
+read 64932
+read 31080
+write 252008 2136
+write 60824 2137
+read 122904
+write 53472 2139
+write 23880 2140
+read 58576
+read 39276
+read 307780
+read 16912
+read 29108
+write 89200 2146
+read 9744
+read 56272
+read 17428
+write 2292 2150
+write 33012 2151
+read 64628
+read 13512
+read 46432
+write 309348 2155
+read 3564
+write 66396 2157
+write 314256 2158
+read 5552
+read 13640
+write 14048 2161
+write 65944 2162
+read 53380
+read 40552
+read 24984
+read 9212
+read 25836
+read 49036
+write 76716 2169
+write 75348 2170
+read 266376
+read 5388
+read 33944
+read 67296
+write 58832 2175
+read 41016
+read 41132
+read 9364
+read 47896
+write 848 2180
+read 12808
+read 54816
+read 24588
+read 72180
+write 80832 2185
+read 79168
+write 35704 2187
+read 59892
+read 154408
+read 25080
+read 40284
+read 4184
+read 19284
+read 76640
+read 15328
+read 168168
+write 25592 2197
+read 146736
+write 18160 2199
+read 30916
+read 9168
+write 246080 2202
+read 67504
+read 42764
+read 77736
+write 323992 2206
+write 25660 2207
+read 280036
+read 10976
+read 10576
+read 322388
+write 33692 2212
+read 5104
+read 314800
+read 36948
+write 59400 2216
+write 44412 2217
+read 71300
+read 127664
+write 35136 2220
+read 75216
+read 350920
+read 8020
+write 75372 2224
+write 324408 2225
+write 12744 2226
+read 24444
+read 21904
+write 23492 2229
+read 255728
+read 73960
+read 339068
+read 44404
+read 1012
+read 62980
+read 81864
+read 18216
+read 38452
+write 36732 2239
+read 50656
+write 68448 2241
+write 25488 2242
+read 133540
+write 49232 2244
+write 73844 2245
+write 15052 2246
+read 3420
+read 212652
+write 31240 2249
+read 18680
+write 69276 2251
+read 24848
+write 21956 2253
+read 337540
+write 24604 2255
+read 19188
+read 48080
+read 47356
+read 21112
+write 41928 2260
+read 11000
+write 50052 2262
+read 35100
+read 23268
+read 37116
+write 12168 2266
+read 40380
+read 55144
+read 49492
+read 47908
+read 7244
+read 29396
+read 43216
+write 38384 2274
+read 14800
+read 55520
+read 63712
+write 76196 2278
+read 23972
+read 55456
+read 45028
+write 60356 2282
+read 26724
+read 18028
+read 35772
+read 19448
+read 77744
+read 75656
+read 19820
+read 54392
+read 1228
+read 252972
+read 228672
+read 11180
+read 65268
+write 59244 2296
+write 5168 2297
+write 18164 2298
+read 48300
+read 297148
+write 19332 2301
+read 17680
+read 393460
+read 22684
+read 29172
+read 15920
+write 98300 2307
+read 81868
+read 208712
+read 49732
+read 60136
+read 173276
+read 48688
+read 63604
+read 70884
+read 44728
+write 76168 2317
+write 30784 2318
+read 257292
+write 395608 2320
+read 52632
+read 26176
+read 56348
+write 94480 2324
+write 1072 2325
+read 64520
+write 66908 2327
+read 72156
+read 8748
+write 160664 2330
+write 64096 2331
+read 53512
+read 46052
+read 32568
+read 64780
+write 18248 2336
+write 66868 2337
+write 35800 2338
+read 259064
+read 7112
+read 71892
+read 358600
+read 12568
+read 110416
+write 15296 2345
+read 101036
+read 57816
+read 27992
+write 81592 2349
+write 75304 2350
+write 213012 2351
+read 368788
+read 286076
+read 2804
+read 63076
+read 65688
+write 37412 2357
+write 11576 2358
+write 36736 2359
+read 46820
+read 49264
+read 11552
+read 27732
+write 67192 2364
+read 63940
+write 62148 2366
+write 81804 2367
+read 56320
+read 71892
+read 390328
+read 440
+read 78988
+read 24256
+read 43036
+write 73068 2375
+read 259844
+read 52420
+read 15180
+read 16628
+read 101704
+read 394300
+write 64396 2382
+write 39928 2383
+read 260960
+read 16544
+read 22372
+write 209184 2387
+write 95128 2388
+read 191888
+write 69932 2390
+read 81120
+read 27240
+read 200056
+read 20584
+read 21472
+read 95532
+write 28912 2397
+read 12592
+read 24872
+read 48088
+read 200592
+read 72316
+read 61060
+read 40360
+read 72696
+read 70192
+read 57688
+write 60160 2408
+write 23616 2409
+read 350396
+read 27288
+write 34904 2412
+read 143040
+write 43704 2414
+read 34932
+write 14720 2416
+read 28140
+read 33500
+write 81392 2419
+write 53140 2420
+write 47928 2421
+read 357884
+write 74448 2423
+read 112376
+read 18600
+read 81272
+read 62872
+read 65340
+write 31696 2429
+read 57900
+write 39876 2431
+read 25280
+write 18908 2433
+write 33812 2434
+read 33776
+read 42156
+read 6396
+write 23568 2438
+read 337880
+read 73136
+read 49800
+read 74172
+read 43292
+read 77056
+read 49008
+read 11200
+write 49460 2447
+read 160840
+write 18072 2449
+read 41736
+read 137976
+read 213840
+write 379676 2453
+read 50176
+read 17860
+read 10128
+read 62936
+write 11584 2458
+read 234628
+write 14284 2460
+read 77484
+read 3308
+write 319700 2463
+read 79736
+read 31120
+read 22288
+write 48640 2467
+write 50016 2468
+write 7472 2469
+write 46328 2470
+read 40328
+read 932
+read 50272
+write 65128 2474
+read 83116
+write 24060 2476
+read 31276
+read 4892
+read 89416
+read 56324
+read 21564
+write 75532 2482
+read 15472
+write 97396 2484
+read 267756
+write 11648 2486
+write 60128 2487
+read 55208
+read 6612
+read 35808
+read 20012
+read 40300
+read 191064
+read 117756
+write 182596 2495
+read 12964
+write 22212 2497
+write 1644 2498
+read 4256
+read 27116
+write 304668 2501
+write 9848 2502
+read 360076
+read 25904
+read 6692
+write 66740 2506
+read 45388
+read 397500
+read 14808
+write 39320 2510
+read 54276
+read 64016
+read 61792
+read 74680
+read 61492
+read 64752
+read 6904
+read 60400
+read 124552
+write 34212 2520
+write 62360 2521
+read 39084
+write 70208 2523
+read 25816
+write 8524 2525
+read 31744
+read 52576
+read 35404
+read 194476
+write 70856 2530
+read 19368
+read 360748
+read 39568
+read 31552
+write 17432 2535
+read 16740
+read 6388
+read 35796
+read 68056
+write 64640 2540
+read 28672
+read 57852
+read 277276
+read 328444
+read 8368
+read 56960
+write 36200 2547
+read 355884
+read 65256
+read 66040
+read 351280
+read 197360
+read 56040
+read 7148
+read 59708
+read 51288
+read 56144
+read 51780
+write 29188 2559
+read 225684
+read 34460
+write 22636 2562
+read 22504
+read 254340
+read 6724
+read 75140
+read 49760
+read 191332
+read 45024
+read 12096
+read 105720
+read 57436
+write 59688 2573
+write 51848 2574
+read 6300
+read 49304
+read 146708
+read 77428
+read 7900
+read 171916
+write 11388 2581
+write 302436 2582
+write 125576 2583
+read 46284
+read 193320
+write 73660 2586
+read 4992
+read 47292
+read 37956
+read 211820
+read 71988
+read 1164
+write 69952 2593
+write 29288 2594
+read 220732
+read 15228
+write 194060 2597
+read 8824
+read 347772
+write 37044 2600
+read 1804
+write 67876 2602
+read 65340
+read 286416
+read 281380
+read 3928
+write 7112 2607
+read 33052
+read 61728
+read 52308
+write 10604 2611
+write 34976 2612
+read 73712
+read 9472
+read 17480
+read 22612
+read 52180
+read 247952
+read 9252
+write 57492 2620
+read 71768
+read 193984
+read 43452
+read 14076
+write 46276 2625
+write 43100 2626
+read 10244
+read 53680
+read 33748
+write 178776 2630
+write 1220 2631
+read 249760
+write 320600 2633
+write 99536 2634
+write 5460 2635
+read 36224
+read 10744
+write 43440 2638
+read 73140
+write 330028 2640
+write 6588 2641
+read 292024
+read 35160
+read 24032
+write 69360 2645
+read 8084
+write 188080 2647
+read 19116
+write 29732 2649
+write 47248 2650
+write 5060 2651
+write 14196 2652
+read 48072
+read 54260
+write 8596 2655
+write 35024 2656
+read 18976
+read 75580
+read 54216
+read 37424
+read 305340
+read 49364
+read 31012
+read 12948
+read 170420
+write 2420 2666
+read 18240
+read 47940
+read 71604
+read 23796
+read 78608
+read 73160
+read 59736
+read 280336
+read 284240
+read 141272
+read 19372
+write 165464 2678
+read 31396
+read 58968
+write 19212 2681
+read 47488
+write 284196 2683
+read 310840
+read 37560
+read 5840
+read 266868
+read 79344
+read 59556
+read 68816
+read 45036
+read 6232
+write 10420 2693
+read 74004
+read 12932
+write 79884 2696
+read 73892
+read 62484
+read 34684
+read 81052
+read 91228
+read 6024
+write 46692 2703
+read 5372
+write 34388 2705
+read 4900
+read 83368
+read 313708
+read 172000
+read 167648
+write 15812 2711
+read 40552
+read 29032
+read 26500
+read 329000
+read 70788
+read 45192
+read 39860
+read 46032
+read 238056
+write 27992 2721
+read 81244
+write 67892 2723
+read 38300
+read 20420
+read 26692
+read 48900
+write 10420 2728
+read 121056
+write 76372 2730
+read 53548
+read 80564
+read 8592
+write 4600 2734
+read 17144
+read 14704
+read 13460
+read 51144
+write 10272 2739
+write 36908 2740
+read 904
+read 23120
+read 292568
+read 12196
+read 407720
+read 20224
+read 72692
+read 398948
+read 47128
+read 253588
+read 276652
+write 37276 2752
+read 13728
+write 17632 2754
+write 30888 2755
+write 44192 2756
+write 197716 2757
+read 15400
+read 50240
+write 81004 2760
+read 244088
+read 205080
+read 197824
+read 7528
+read 344348
+write 37976 2766
+read 6524
+read 54008
+read 49520
+read 204948
+read 74876
+write 55356 2772
+read 1796
+read 57908
+read 135984
+read 74716
+read 11540
+write 76232 2778
+write 33892 2779
+read 78860
+read 32540
+read 375264
+read 9084
+read 5104
+write 44912 2785
+write 70064 2786
+write 22452 2787
+read 34412
+read 44868
+read 28488
+read 78344
+write 67732 2792
+read 48196
+write 65192 2794
+read 212284
+read 39468
+read 192416
+read 71196
+read 66796
+read 43924
+write 142308 2801
+write 40668 2802
+read 99836
+read 47532
+read 14964
+read 202136
+write 56464 2807
+read 71664
+read 15032
+read 69752
+write 64672 2811
+write 53360 2812
+read 3800
+write 4844 2814
+read 6228
+write 32008 2816
+read 311540
+read 72072
+write 11356 2819
+write 51736 2820
+read 387648
+read 7260
+read 59540
+read 63940
+write 65548 2825
+read 32088
+write 38264 2827
+write 80232 2828
+write 53516 2829
+read 1664
+read 34304
+read 193352
+write 31500 2833
+read 70664
+write 39648 2835
+write 54396 2836
+write 51728 2837
+read 35600
+read 69472
+write 79260 2840
+write 79156 2841
+write 74412 2842
+write 39344 2843
+read 121892
+read 34432
+write 36088 2846
+write 51644 2847
+read 82556
+read 383328
+write 7088 2850
+write 52784 2851
+read 71668
+read 256060
+write 81308 2854
+write 399336 2855
+read 21992
+read 26180
+read 24920
+read 36416
+read 218944
+read 30468
+write 33064 2862
+read 183496
+write 70628 2864
+write 406032 2865
+write 14556 2866
+read 43632
+read 188364
+read 77736
+read 43780
+read 30688
+read 25836
+write 77384 2873
+write 69516 2874
+read 315644
+read 141512
+read 73572
+read 56344
+read 42352
+read 57392
+read 69176
+read 45760
+read 78088
+read 35568
+read 70708
+write 41660 2886
+read 30852
+write 43916 2888
+write 4060 2889
+read 383792
+read 56876
+read 74592
+read 48872
+read 74492
+read 56832
+read 30632
+read 70240
+write 30692 2898
+read 80592
+read 26912
+read 52536
+read 289492
+read 41180
+read 52300
+read 105368
+read 12644
+write 162332 2907
+read 16876
+read 31604
+read 68472
+write 50156 2911
+write 13564 2912
+write 1412 2913
+write 67840 2914
+write 250232 2915
+read 299684
+write 4060 2917
+read 10056
+read 146936
+read 76192
+read 69488
+read 265044
+write 343348 2923
+read 50684
+read 9796
+read 264
+read 387708
+write 362940 2928
+read 69396
+read 58196
+read 36516
+read 43768
+read 10436
+read 55844
+read 41156
+write 366728 2936
+write 339076 2937
+write 42548 2938
+write 47648 2939
+read 201240
+read 34104
+write 52416 2942
+read 77556
+read 47764
+write 12484 2945
+read 71116
+write 74516 2947
+read 55952
+read 235732
+read 169548
+read 31156
+write 24552 2952
+read 34888
+read 32312
+read 66028
+write 325888 2956
+read 123744
+read 69980
+read 193816
+read 56000
+read 38268
+read 106060
+read 23136
+read 1168
+read 50008
+read 59340
+read 46696
+read 35984
+read 35444
+write 64572 2970
+read 16908
+write 204284 2972
+write 52888 2973
+write 80604 2974
+read 32828
+read 51956
+write 76920 2977
+read 361532
+read 50896
+read 73772
+read 265528
+write 25636 2982
+read 47208
+write 2260 2984
+read 49072
+read 43096
+read 46256
+read 110580
+read 283784
+read 75232
+write 300160 2991
+read 24396
+write 50100 2993
+write 229556 2994
+read 27972
+write 28356 2996
+read 11744
+write 992 2998
+read 57868
+read 2120
+read 12320
+read 60052
+read 10456
+write 232 3004
+read 24072
+write 382076 3006
+read 62528
+read 74568
+read 75244
+write 4264 3010
+read 225832
+write 379200 3012
+read 13148
+read 42140
+read 15100
+read 77072
+read 25288
+read 4016
+read 38836
+read 37052
+read 65568
+write 12108 3022
+write 60356 3023
+read 54376
+write 27112 3025
+read 33692
+read 287892
+read 270604
+read 32312
+read 29724
+read 275792
+read 66916
+read 10396
+read 8404
+write 71036 3035
+read 51244
+read 376484
+write 10332 3038
+read 15116
+read 38304
+read 62144
+read 37180
+read 42612
+read 158268
+read 9576
+write 127176 3046
+read 22788
+read 4248
+read 12692
+read 6020
+read 20736
+read 20496
+read 56324
+write 3108 3054
+read 5228
+read 62264
+read 278172
+write 2224 3058
+write 33472 3059
+read 31400
+read 289352
+read 59232
+write 39568 3063
+write 234484 3064
+read 63328
+read 48740
+read 6104
+read 61084
+read 24456
+write 12608 3070
+write 32628 3071
+write 42868 3072
+read 14600
+read 17816
+read 20696
+write 268044 3076
+read 19928
+write 20272 3078
+write 6832 3079
+read 21748
+read 16188
+write 53052 3082
+write 149828 3083
+write 202356 3084
+write 50992 3085
+read 64308
+write 16140 3087
+write 70476 3088
+write 27192 3089
+read 188
+read 47860
+write 67900 3092
+read 74508
+read 248028
+write 19328 3095
+write 31296 3096
+read 38584
+write 63308 3098
+read 239160
+read 19136
+read 97900
+write 80356 3102
+write 343440 3103
+read 1936
+write 6056 3105
+write 1124 3106
+read 5556
+read 49232
+read 28912
+write 180876 3110
+read 58640
+read 31448
+read 92324
+read 55240
+read 11224
+read 220624
+read 152824
+read 14624
+read 17996
+write 65248 3120
+write 80708 3121
+write 50652 3122
+write 88720 3123
+write 17636 3124
+read 51704
+read 59508
+read 164736
+read 796
+write 65164 3129
+read 13432
+read 49684
+read 73536
+write 11452 3133
+read 221220
+read 383492
+read 32584
+read 19852
+read 40460
+read 38616
+read 59276
+read 27184
+read 66528
+read 256156
+read 37388
+read 94356
+read 359284
+write 20712 3147
+write 58004 3148
+read 299312
+read 28628
+read 311500
+read 9460
+read 298948
+read 19404
+read 24752
+read 317812
+read 25336
+read 68792
+read 34584
+read 8436
+write 66652 3161
+write 59452 3162
+read 8388
+read 30808
+write 74356 3165
+write 60452 3166
+write 38916 3167
+write 21480 3168
+write 17976 3169
+read 46640
+read 58944
+write 388988 3172
+read 72148
+write 400812 3174
+write 25220 3175
+read 371180
+read 78276
+read 22096
+read 6640
+read 27272
+write 19900 3181
+read 27544
+read 45572
+read 12780
+read 47928
+read 19064
+read 56612
+write 195308 3188
+read 12232
+read 46436
+read 23940
+write 61524 3192
+read 78748
+write 57556 3194
+write 18860 3195
+read 33804
+write 34352 3197
+read 11500
+read 62340
+read 22860
+read 31740
+read 16688
+write 350804 3203
+write 22536 3204
+write 25152 3205
+read 17048
+read 44808
+write 42400 3208
+read 70872
+read 78784
+read 38400
+read 275344
+read 43396
+write 9268 3214
+write 13988 3215
+read 21304
+write 77236 3217
+read 68648
+read 17152
+read 33656
+write 368892 3221
+read 190168
+read 40868
+write 40412 3224
+write 53604 3225
+read 58592
+read 42964
+write 63876 3228
+read 4764
+read 33264
+read 53288
+write 68848 3232
+write 74860 3233
+read 361964
+read 48180
+write 376 3236
+write 75728 3237
+read 358980
+read 37692
+read 65568
+read 400448
+read 60952
+read 27688
+read 64096
+read 80872
+write 133524 3246
+read 56048
+read 130860
+read 2592
+read 66552
+read 18356
+read 42788
+read 43108
+write 35148 3254
+read 74472
+write 25524 3256
+read 276568
+read 62088
+read 71548
+read 203032
+read 202400
+read 225312
+read 30680
+read 6188
+read 18840
+write 81140 3266
+read 41004
+read 57628
+write 109036 3269
+read 39920
+read 46456
+read 149580
+read 31944
+read 76536
+read 302908
+read 210248
+write 75708 3277
+read 20128
+read 50760
+write 46276 3280
+read 76404
+read 67292
+read 80464
+read 304940
+read 38448
+read 4388
+write 100416 3287
+read 79932
+read 16948
+read 24916
+write 55892 3291
+read 69712
+write 54036 3293
+read 208832
+read 37836
+read 359600
+write 131168 3297
+write 24408 3298
+read 109324
+write 44832 3300
+write 13548 3301
+read 13880
+write 170232 3303
+read 46968
+read 42628
+write 158496 3306
+read 280356
+write 56072 3308
+read 13072
+read 75828
+read 4380
+read 72900
+read 24536
+write 37820 3314
+read 78556
+write 22612 3316
+write 5064 3317
+read 31620
+read 31404
+read 1144
+read 6016
+read 67492
+read 64612
+read 73176
+read 33380
+write 66604 3326
+write 6060 3327
+read 69980
+read 105884
+write 23476 3330
+read 68512
+write 216196 3332
+read 20504
+write 38672 3334
+write 7932 3335
+read 15936
+write 80212 3337
+read 19168
+write 170304 3339
+write 67600 3340
+read 43484
+write 235512 3342
+read 23616
+read 16652
+read 60684
+write 16620 3346
+read 104324
+read 270064
+read 6820
+read 95484
+read 49252
+read 280
+read 9028
+read 67756
+read 344256
+write 27492 3356
+write 68580 3357
+write 123284 3358
+read 36420
+write 69952 3360
+read 39644
+write 73940 3362
+read 8600
+write 55660 3364
+read 325016
+write 31076 3366
+read 66000
+write 10360 3368
+read 1452
+read 407852
+write 18076 3371
+read 58164
+write 320704 3373
+write 20572 3374
+read 45172
+read 52312
+write 44944 3377
+read 35856
+read 57552
+write 44992 3380
+read 357312
+read 69972
+read 71668
+read 54928
+read 1968
+read 78944
+write 77828 3387
+write 58408 3388
+write 35632 3389
+write 238712 3390
+read 34104
+write 18748 3392
+read 35772
+write 54192 3394
+read 7480
+read 408492
+read 26036
+read 75792
+write 79604 3399
+write 72084 3400
+write 36540 3401
+read 212400
+read 349908
+read 69328
+read 46600
+read 71536
+read 231816
+write 4108 3408
+read 32956
+read 33544
+read 60284
+read 9392
+write 62432 3413
+write 326968 3414
+read 69312
+write 6636 3416
+read 69640
+read 53968
+read 42452
+write 80676 3420
+read 68392
+write 55816 3422
+write 48504 3423
+read 51488
+write 19356 3425
+read 2560
+read 67052
+read 928
+read 30020
+read 146360
+write 47904 3431
+write 11588 3432
+read 35092
+write 16108 3434
+write 46260 3435
+read 49904
+read 121896
+read 37988
+read 22244
+read 205304
+write 28576 3441
+write 248304 3442
+write 2476 3443
+read 329884
+write 77504 3445
+write 320200 3446
+write 21148 3447
+read 9212
+write 16580 3449
+read 38940
+write 33808 3451
+read 43076
+read 49452
+read 55548
+read 273196
+write 30212 3456
+read 41976
+write 44968 3458
+write 355952 3459
+read 29200
+read 46208
+read 73796
+write 196836 3463
+read 10184
+read 55152
+read 5576
+read 30936
+read 153636
+read 9316
+write 70712 3470
+write 47924 3471
+write 4276 3472
+read 63996
+write 77160 3474
+read 33876
+write 21572 3476
+read 20804
+read 150544
+write 18620 3479
+write 80220 3480
+read 53212
+write 34160 3482
+read 1556
+read 210796
+read 30024
+read 58564
+read 42972
+read 2168
+write 29944 3489
+read 18220
+write 31384 3491
+read 35760
+write 139336 3493
+read 78652
+read 70516
+read 56628
+read 77048
+read 10952
+write 55896 3499
+write 55448 3500
+read 54836
+read 61792
+read 56328
+write 396736 3504
+write 9932 3505
+read 13516
+read 72440
+read 48596
+read 33692
+write 75780 3510
+write 191932 3511
+write 908 3512
+read 281896
+read 407220
+write 61384 3515
+read 67472
+read 245440
+read 69508
+read 76168
+write 49048 3520
+read 64452
+read 76476
+write 357608 3523
+write 52688 3524
+write 6192 3525
+read 17668
+write 34264 3527
+write 246680 3528
+write 101112 3529
+read 26444
+write 2396 3531
+write 56584 3532
+read 55832
+read 11440
+write 80296 3535
+read 15900
+read 68640
+read 63828
+read 28676
+read 5376
+read 77832
+read 39812
+read 65700
+read 48400
+write 52012 3545
+read 66820
+read 16960
+read 63044
+read 66860
+read 29908
+write 50616 3551
+write 36660 3552
+read 382396
+write 53144 3554
+write 131596 3555
+write 77220 3556
+read 4604
+read 70836
+read 62532
+read 9544
+write 76932 3561
+read 79200
+write 249108 3563
+write 27064 3564
+read 22720
+read 48844
+write 235560 3567
+read 105636
+read 14220
+read 63844
+read 64100
+write 325076 3572
+write 47364 3573
+write 39128 3574
+write 53076 3575
+read 377440
+read 48724
+read 126012
+write 8096 3579
+read 8440
+write 10808 3581
+write 248744 3582
+read 70680
+read 9448
+read 233752
+read 44196
+write 60696 3587
+read 397684
+write 71956 3589
+read 4448
+read 3916
+write 58080 3592
+read 34572
+read 408232
+read 58656
+write 72460 3596
+read 79744
+write 34032 3598
+write 20172 3599
+read 61876
+write 24344 3601
+read 38496
+read 260360
+read 56140
+read 72320
+read 78988
+read 28172
+read 28636
+read 16072
+write 143164 3610
+read 126872
+read 76788
+read 9444
+read 60700
+write 13012 3615
+read 22076
+write 81604 3617
+read 20760
+write 8032 3619
+read 56032
+read 53656
+read 62304
+write 29068 3623
+read 1436
+read 22940
+read 57520
+read 349032
+read 20920
+read 24244
+write 70604 3630
+write 75076 3631
+read 59524
+read 313248
+read 190996
+read 9928
+read 408088
+write 60336 3637
+read 257712
+read 74168
+write 27008 3640
+read 7812
+read 69528
+write 18676 3643
+read 44704
+write 43080 3645
+write 34172 3646
+read 49052
+read 274640
+read 52820
+read 41244
+read 4960
+read 252708
+read 45484
+read 320364
+read 203192
+read 9576
+write 18004 3657
+read 11032
+read 285028
+read 11204
+write 153844 3661
+read 65528
+write 30756 3663
+write 53468 3664
+write 25844 3665
+read 107744
+write 73592 3667
+read 231656
+write 34888 3669
+read 16040
+read 12868
+read 28644
+read 185204
+write 21504 3674
+write 39628 3675
+read 52528
+read 62224
+read 335076
+read 8192
+read 7112
+read 20624
+write 10892 3682
+read 47928
+read 25280
+read 58056
+read 37672
+read 43144
+write 70748 3688
+read 21056
+read 75152
+read 28008
+write 56544 3692
+write 34864 3693
+read 76692
+read 335572
+read 252284
+write 63752 3697
+read 44436
+read 6152
+read 309072
+read 256076
+read 26616
+write 53412 3703
+read 38672
+read 4756
+read 36984
+read 7540
+read 61780
+read 61692
+read 26384
+read 176092
+write 26820 3712
+read 165616
+read 12968
+write 63728 3715
+write 337784 3716
+write 66268 3717
+write 41268 3718
+read 4636
+read 80728
+read 367952
+write 17216 3722
+write 5008 3723
+read 24000
+write 280244 3725
+write 255656 3726
+write 44088 3727
+read 46176
+read 135204
+write 330440 3730
+read 31932
+write 253960 3732
+read 16884
+read 2180
+write 69672 3735
+write 51848 3736
+read 49864
+read 77960
+read 58288
+read 76052
+write 70616 3741
+read 12792
+read 1488
+write 78776 3744
+read 58908
+read 43592
+read 56464
+read 12520
+read 360
+write 17132 3750
+write 21536 3751
+read 358280
+read 68192
+read 33916
+write 396 3755
+write 289040 3756
+read 66628
+write 77852 3758
+read 21468
+read 68152
+read 14484
+read 67476
+write 68244 3763
+read 57168
+read 65040
+write 134032 3766
+read 89092
+write 55808 3768
+write 313888 3769
+read 389112
+write 63616 3771
+read 47196
+read 394108
+read 64660
+read 5468
+read 7300
+read 35452
+read 12484
+read 225780
+write 79764 3780
+read 227964
+read 69044
+read 79216
+read 31248
+write 18700 3785
+read 40176
+read 160320
+read 78776
+write 181068 3789
+read 816
+write 247336 3791
+read 47872
+read 144
+read 1192
+write 64892 3795
+read 77188
+write 124156 3797
+read 36592
+read 54976
+write 72040 3800
+read 245872
+write 336944 3802
+write 271460 3803
+read 79548
+read 65336
+write 242312 3806
+read 51800
+write 7720 3808
+read 77060
+read 41644
+write 75064 3811
+write 9444 3812
+read 52512
+read 199180
+read 2880
+read 270680
+read 78652
+write 75180 3818
+read 13044
+read 22380
+read 71016
+read 41208
+write 70936 3823
+read 19564
+read 79336
+write 59220 3826
+read 76056
+read 298932
+read 384016
+read 596
+write 62088 3831
+read 22132
+read 53120
+write 143156 3834
+write 225948 3835
+read 54460
+read 340104
+read 63884
+read 205656
+read 13956
+write 44480 3841
+read 29692
+read 44736
+read 7472
+read 80724
+read 233112
+write 373612 3847
+read 68744
+write 289084 3849
+read 9624
+write 35668 3851
+write 67076 3852
+write 48656 3853
+read 42388
+read 52496
+read 386992
+write 34164 3857
+write 90004 3858
+read 9044
+read 43064
+write 57496 3861
+write 80248 3862
+read 79128
+read 51348
+read 403804
+read 30420
+read 71688
+read 52112
+read 59292
+read 37884
+read 21680
+write 167864 3872
+write 387216 3873
+read 53244
+write 45916 3875
+read 233440
+read 33576
+read 395992
+read 223224
+read 306016
+read 220288
+read 378224
+read 14796
+write 86700 3884
+write 50328 3885
+write 67456 3886
+read 5260
+read 54724
+write 15148 3889
+write 77768 3890
+write 5272 3891
+read 40044
+read 37032
+write 289152 3894
+read 360540
+read 20816
+read 15032
+read 70272
+read 51008
+read 53452
+read 48796
+read 61456
+write 67860 3903
+read 56844
+read 4040
+write 21508 3906
+write 49172 3907
+read 71172
+read 66644
+read 29812
+read 27304
+read 24892
+write 106384 3913
+read 31512
+write 78776 3915
+read 34612
+read 10092
+write 80700 3918
+read 4460
+read 127720
+write 66244 3921
+write 58200 3922
+read 68396
+read 364280
+read 44080
+read 9440
+read 53540
+write 49840 3928
+read 45520
+read 61640
+read 34752
+read 7488
+write 73500 3933
+write 3844 3934
+write 9896 3935
+read 79476
+read 322240
+read 43240
+read 76440
+read 19056
+read 42292
+read 74556
+read 36904
+read 64300
+read 66172
+read 1968
+read 34908
+read 9376
+write 32684 3949
+read 36692
+read 63844
+write 24364 3952
+read 177896
+write 79548 3954
+write 15008 3955
+read 37544
+read 24696
+read 33324
+read 57668
+read 12568
+read 54924
+read 363780
+read 64940
+read 63336
+read 20132
+read 215348
+read 41720
+write 97988 3968
+read 317188
+write 74740 3970
+write 6596 3971
+read 75240
+read 73456
+read 13304
+read 340584
+read 8408
+read 6948
+read 362992
+read 43556
+write 19020 3980
+read 62380
+read 12060
+read 43896
+read 61808
+read 5404
+write 232200 3986
+read 71332
+write 56632 3988
+read 78292
+write 127980 3990
+read 75280
+write 310916 3992
+read 132
+read 49812
+read 66468
+read 191452
+read 69748
+write 59804 3998
+read 241504
+read 63456
+read 73000
+read 379596
+read 61272
+read 173108
+write 63728 4005
+read 38192
+write 78940 4007
+write 42168 4008
+read 69500
+read 32856
+write 56908 4011
+write 3952 4012
+read 62416
+write 7004 4014
+read 119356
+write 22268 4016
+read 52344
+write 45256 4018
+read 65412
+read 51168
+read 41288
+read 97520
+read 34932
+read 8960
+write 40712 4025
+read 244548
+write 320836 4027
+read 75196
+read 65348
+read 148796
+write 170684 4031
+read 58868
+read 18500
+read 47896
+read 211692
+read 23784
+read 66044
+read 63748
+read 96
+write 36296 4040
+read 51220
+write 56836 4042
+read 14112
+read 65548
+read 17968
+write 155436 4046
+write 57196 4047
+write 323872 4048
+read 35968
+read 29492
+read 10560
+read 172572
+read 26504
+read 55240
+read 30352
+read 17144
+write 74396 4057
+read 67636
+read 56604
+write 59412 4060
+read 61888
+write 14448 4062
+write 66772 4063
+read 261672
+read 347316
+write 11268 4066
+read 167680
+write 13804 4068
+write 2304 4069
+read 52108
+write 67116 4071
+read 2052
+read 52180
+write 30948 4074
+write 72592 4075
+write 34548 4076
+write 61824 4077
+read 65304
+read 7212
+read 27228
+write 63184 4081
+read 217640
+read 328456
+read 21628
+read 884
+write 128720 4086
+read 81836
+write 72684 4088
+write 62076 4089
+write 407476 4090
+write 24916 4091
+read 81584
+read 79252
+read 7992
+write 70040 4095
+write 33000 4096
+read 46712
+read 8968
+read 179088
+read 25128
+read 305708
+read 65164
+read 11152
+write 16980 4104
+write 74368 4105
+read 33488
+read 66100
+read 84400
+read 81364
+read 51960
+write 41304 4111
+read 3944
+write 30804 4113
+read 12136
+write 273000 4115
+write 76764 4116
+write 5368 4117
+read 367156
+write 28496 4119
+read 12816
+read 67432
+write 13204 4122
+read 19224
+read 384908
+write 334232 4125
+write 52104 4126
+write 80944 4127
+read 61000
+read 62736
+write 48756 4130
+read 9244
+write 117476 4132
+read 50324
+read 45528
+read 79920
+read 24128
+read 49524
+write 47548 4138
+read 5356
+read 37856
+read 68444
+write 11356 4142
+write 36640 4143
+write 14968 4144
+read 40988
+read 71664
+read 38208
+read 4936
+read 61400
+read 377348
+read 81508
+read 69436
+read 121848
+read 330348
+read 288
+write 7776 4156
+read 38988
+read 744
+write 41636 4159
+write 8416 4160
+write 48836 4161
+read 63564
+read 1720
+read 291380
+read 10004
+write 54384 4166
+write 57732 4167
+write 56436 4168
+write 17348 4169
+read 86712
+read 79992
+read 31732
+read 66924
+read 12616
+read 10632
+write 5132 4176
+write 848 4177
+write 216340 4178
+read 64328
+read 27132
+read 402120
+write 38000 4182
+write 21128 4183
+write 19860 4184
+read 32848
+read 81904
+read 73672
+read 26296
+read 55884
+write 188356 4190
+read 398096
+read 62796
+read 9352
+write 37832 4194
+write 58468 4195
+read 4424
+read 318696
+read 584
+write 81416 4199
+read 390452
+read 70760
+write 7100 4202
+read 48196
+read 63088
+read 6380
+read 23552
+read 19288
+write 37396 4208
+read 21640
+write 41620 4210
+read 73964
+read 280876
+read 294680
+read 43408
+read 80616
+read 11464
+read 382604
+read 42728
+read 47304
+read 72628
+read 14504
+write 8384 4222
+read 25940
+read 34332
+read 20652
+read 332372
+write 209476 4227
+read 19836
+write 2832 4229
+read 240896
+write 11008 4231
+read 5124
+read 42388
+read 346980
+read 30676
+write 32492 4236
+write 267156 4237
+write 55176 4238
+read 56952
+read 81376
+read 10992
+write 268360 4242
+read 78140
+read 55544
+write 5500 4245
+read 36744
+read 49832
+read 66588
+write 72504 4249
+read 65324
+read 81248
+read 211868
+read 50860
+read 48052
+read 58108
+write 36780 4256
+read 69208
+read 189000
+read 330888
+read 76784
+write 30080 4261
+read 12064
+read 56996
+write 20216 4264
+read 7964
+read 195272
+write 116616 4267
+read 20788
+write 12904 4269
+read 41912
+read 62524
+read 73872
+read 78380
+write 12980 4274
+read 26344
+read 32180
+read 170804
+read 66284
+write 65768 4279
+write 72464 4280
+read 71784
+read 11356
+read 379004
+write 58028 4284
+read 46044
+read 16316
+read 58348
+read 3656
+write 37120 4289
+write 45560 4290
+write 65912 4291
+write 23388 4292
+read 355136
+read 12300
+write 210344 4295
+read 67388
+read 106148
+read 192208
+write 8296 4299
+read 4240
+write 54152 4301
+read 13784
+read 45372
+write 68412 4304
+read 146156
+write 72488 4306
+read 38080
+write 196540 4308
+read 32440
+read 31864
+read 359828
+write 46724 4312
+read 76932
+write 397892 4314
+read 64304
+write 5684 4316
+read 49756
+read 39764
+read 79252
+read 310664
+read 19544
+read 17804
+read 43732
+read 75160
+read 293944
+read 17480
+write 39816 4327
+read 67536
+write 46012 4329
+read 58040
+write 59932 4331
+write 40012 4332
+read 14840
+write 28052 4334
+read 30804
+read 327504
+read 57080
+write 35508 4338
+read 185368
+read 3380
+read 21932
+write 46588 4342
+read 57396
+read 28496
+read 44168
+write 18608 4346
+write 34368 4347
+read 72296
+read 49836
+write 8192 4350
+read 57320
+write 14340 4352
+read 78304
+write 166756 4354
+read 61468
+read 28880
+read 27120
+read 2372
+read 11884
+read 61644
+read 1108
+read 37400
+write 60216 4363
+read 32116
+read 51680
+write 253800 4366
+read 18712
+write 79512 4368
+read 30360
+read 21344
+read 28096
+read 56548
+read 4260
+write 81504 4374
+read 7096
+write 63064 4376
+read 22712
+write 59844 4378
+write 70108 4379
+write 303212 4380
+read 29672
+read 42404
+read 26920
+write 31672 4384
+read 3292
+read 239564
+read 77588
+read 33104
+read 153120
+read 347868
+read 74520
+read 20920
+read 69456
+read 62412
+read 17448
+read 85576
+read 57520
+write 18912 4398
+write 13952 4399
+read 66768
+write 14188 4401
+write 41088 4402
+read 135200
+read 44536
+read 5464
+read 47876
+write 300828 4407
+read 67872
+read 47500
+read 26588
+read 77716
+read 36024
+read 386264
+write 44052 4414
+read 23112
+read 242772
+read 79444
+read 3168
+read 30896
+read 43548
+read 41852
+write 55804 4422
+read 29144
+read 30624
+write 1128 4425
+read 79852
+read 11004
+read 27316
+write 17832 4429
+read 40436
+write 135160 4431
+read 5308
+write 69488 4433
+read 45296
+read 76820
+write 57340 4436
+read 59368
+read 34512
+read 21168
+write 21264 4440
+write 41428 4441
+write 14004 4442
+write 38608 4443
+read 81308
+read 75048
+read 78424
+read 81468
+write 2080 4448
+read 20524
+read 79000
+write 37640 4451
+write 18824 4452
+read 29044
+read 212052
+read 43688
+read 24836
+read 12664
+read 14408
+read 127172
+write 876 4460
+read 65284
+write 47364 4462
+read 51400
+write 54932 4464
+write 40140 4465
+read 31104
+read 19884
+read 66412
+write 51620 4469
+write 29396 4470
+write 23820 4471
+read 1572
+write 15144 4473
+read 29224
+read 73232
+read 10584
+read 94332
+read 193064
+read 47232
+read 245252
+read 149688
+write 222644 4482
+read 64196
+write 64208 4484
+write 61824 4485
+write 71296 4486
+read 328144
+write 49744 4488
+read 373532
+read 66032
+read 17944
+write 904 4492
+read 49392
+read 58900
+read 82456
+read 54668
+read 56216
+write 18324 4498
+read 41120
+read 191000
+read 47988
+write 314412 4502
+read 67596
+read 287988
+read 76096
+read 12336
+read 12248
+read 43332
+read 345428
+write 58536 4510
+read 51072
+write 45132 4512
+read 54308
+write 192704 4514
+read 43500
+read 23668
+read 20532
+read 52952
+read 62464
+read 41772
+read 2124
+read 41428
+read 9524
+read 287428
+write 27124 4525
+write 26576 4526
+read 147912
+read 17612
+write 81628 4529
+write 368604 4530
+read 77888
+read 24532
+write 20732 4533
+read 74488
+read 60032
+read 73604
+read 11752
+read 23228
+write 23700 4539
+read 240300
+read 47824
+write 49220 4542
+write 359204 4543
+read 20548
+write 37092 4545
+read 74460
+read 180508
+write 4840 4548
+read 18484
+read 247332
+read 28988
+read 48664
+write 8092 4553
+read 6692
+read 45840
+read 15768
+read 59704
+write 57192 4558
+read 16584
+read 67140
+read 37512
+read 28768
+read 14680
+read 59824
+read 1824
+read 26452
+read 2272
+read 30764
+read 45364
+read 383280
+write 80864 4571
+read 78928
+read 12952
+read 22496
+write 298492 4575
+read 143860
+read 46256
+read 78376
+read 1600
+read 61660
+read 45512
+write 5112 4582
+read 23412
+read 28836
+read 81664
+read 204492
+read 6292
+read 27064
+write 8676 4589
+read 19204
+read 61796
+read 33448
+read 34928
+read 59568
+write 29044 4595
+read 20352
+read 44340
+read 75520
+read 19360
+read 69408
+read 20120
+write 27448 4602
+write 76472 4603
+write 52420 4604
+read 61764
+write 67092 4606
+read 220108
+read 59772
+read 79428
+read 27072
+read 37308
+write 52972 4612
+read 78900
+read 363164
+write 41904 4615
+read 29224
+write 299052 4617
+read 310632
+write 17304 4619
+read 44752
+write 36668 4621
+read 46332
+write 72204 4623
+read 38352
+read 64376
+read 44728
+read 80340
+read 73944
+read 29180
+read 47384
+read 804
+read 236008
+read 61112
+write 7564 4634
+read 40600
+read 69116
+read 19964
+write 43076 4638
+read 39472
+write 306248 4640
+read 15184
+write 43632 4642
+write 68356 4643
+read 77512
+write 73636 4645
+read 69000
+read 248780
+read 359004
+read 36000
+read 56680
+write 34152 4651
+read 27900
+read 26576
+read 71832
+read 22680
+read 23744
+read 69964
+write 19668 4658
+read 50584
+read 356468
+read 300672
+read 46708
+read 50648
+read 74240
+read 34472
+read 30736
+read 151556
+write 23200 4668
+read 66960
+read 48196
+write 42968 4671
+read 381664
+read 125988
+read 399080
+read 54240
+read 37892
+write 43216 4677
+write 80352 4678
+write 51244 4679
+write 68356 4680
+write 200720 4681
+write 29016 4682
+read 10916
+write 5164 4684
+write 76016 4685
+write 62104 4686
+read 29508
+read 12716
+write 47004 4689
+read 337992
+read 52024
+read 40020
+write 32032 4693
+read 18540
+read 2172
+read 16304
+write 14504 4697
+read 232052
+read 18680
+read 40048
+write 196612 4701
+read 62492
+write 80076 4703
+read 397616
+write 62416 4705
+read 13668
+read 36864
+read 76200
+read 51616
+read 5864
+read 42236
+read 85572
+write 61524 4713
+read 33696
+read 50572
+write 32268 4716
+read 48300
+read 13472
+read 40148
+read 40600
+write 74612 4721
+read 40588
+write 363680 4723
+read 34656
+read 75036
+write 203940 4726
+read 345832
+read 8700
+read 7080
+read 191160
+write 2320 4731
+write 54716 4732
+read 13824
+read 788
+write 34724 4735
+read 66652
+read 305208
+read 81820
+read 391476
+read 61460
+read 72688
+read 31416
+write 204644 4743
+write 252804 4744
+read 9732
+read 23360
+write 74424 4747
+read 53096
+read 307616
+read 43308
+read 49048
+read 51952
+read 94236
+write 43304 4754
+write 25944 4755
+read 28560
+write 71992 4757
+write 62744 4758
+read 12912
+read 48964
+read 81616
+read 138440
+read 27384
+write 3108 4764
+read 45920
+write 44408 4766
+write 35768 4767
+read 63088
+write 59100 4769
+read 24756
+read 252108
+read 23664
+read 247300
+read 390300
+read 63964
+read 6648
+write 52344 4777
+read 52976
+read 74544
+write 65104 4780
+write 35656 4781
+read 261584
+read 59496
+read 52344
+write 24912 4785
+write 71540 4786
+read 33184
+read 112952
+write 10920 4789
+read 45496
+read 179060
+read 22604
+read 16316
+read 11820
+read 355468
+write 11972 4796
+read 288
+write 40304 4798
+write 35016 4799
+read 221836
+read 5060
+write 22200 4802
+read 2756
+read 13572
+read 37032
+read 25968
+read 176084
+read 25480
+read 62164
+write 51836 4810
+write 72744 4811
+write 267904 4812
+write 86224 4813
+read 357544
+read 68932
+read 142620
+read 31764
+read 71408
+read 66056
+read 27040
+read 12308
+read 376448
+read 59832
+read 61792
+read 71928
+read 2956
+read 32944
+read 322160
+write 75344 4829
+read 58500
+read 54636
+write 4496 4832
+read 374636
+read 48552
+read 95560
+read 60204
+read 21128
+read 10084
+read 48356
+write 64088 4840
+read 74468
+write 39932 4842
+read 404940
+read 56392
+write 37764 4845
+read 27148
+read 391412
+read 78036
+read 60544
+read 296308
+write 19408 4851
+read 375920
+read 354284
+read 27796
+write 3276 4855
+read 19792
+write 16412 4857
+read 385624
+write 13916 4859
+read 12888
+read 66336
+read 213980
+read 333524
+read 245468
+write 7068 4865
+write 12920 4866
+read 60240
+read 43028
+read 272436
+read 93052
+read 153948
+read 3076
+read 44640
+read 16740
+read 77628
+read 73284
+write 40256 4877
+read 38364
+read 79216
+read 60888
+read 68208
+read 34436
+read 64136
+read 36768
+write 11104 4885
+write 12944 4886
+read 28212
+read 47528
+read 42684
+read 23620
+read 15052
+read 53988
+read 189768
+write 68824 4894
+write 49984 4895
+read 57552
+read 22176
+write 31116 4898
+read 358012
+read 50664
+read 6428
+read 72652
+write 47380 4903
+read 68676
+write 81416 4905
+read 31592
+read 53920
+read 60308
+write 107008 4909
+read 16776
+read 73300
+read 20004
+read 16428
+read 295364
+read 65532
+read 42320
+write 20044 4917
+write 6288 4918
+read 73488
+read 57192
+read 57660
+read 81240
+read 200640
+read 264676
+read 153612
+read 15464
+read 51748
+read 20780
+read 12196
+read 48236
+write 17128 4931
+read 208132
+read 58472
+read 68112
+read 33380
+read 153064
+write 265616 4937
+read 27404
+read 30372
+read 62776
+read 40652
+read 256
+read 19960
+read 21900
+read 56324
+read 67784
+write 71188 4947
+write 41712 4948
+write 261692 4949
+write 348224 4950
+read 9004
+read 62280
+read 67552
+read 17476
+read 57920
+read 70444
+write 43724 4957
+read 80580
+read 9220
+write 115504 4960
+read 16828
+write 54228 4962
+read 14272
+write 44124 4964
+read 45076
+read 1640
+read 10256
+read 73960
+read 380664
+read 17156
+read 7080
+read 66032
+read 267848
+read 67904
+read 32312
+write 70248 4976
+read 32096
+write 64228 4978
+write 62492 4979
+read 338628
+write 167684 4981
+read 52180
+read 54280
+read 38000
+read 245192
+write 79344 4986
+read 32636
+write 50640 4988
+write 348312 4989
+write 20448 4990
+write 48824 4991
+read 36944
+write 57052 4993
+read 35416
+read 69676
+read 72132
+write 53184 4997
+write 6204 4998
+write 109160 4999

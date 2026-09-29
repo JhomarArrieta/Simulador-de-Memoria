@@ -14,3 +14,6 @@ build/
 vgcore.*
 *.log
 resultados/
+
+# Traza de estres generada con make stress (100000 lineas)
+tests/estres_grande.txt

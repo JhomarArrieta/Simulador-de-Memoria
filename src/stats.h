@@ -16,15 +16,20 @@ typedef struct {
     unsigned long lecturas;
     unsigned long escrituras;
     unsigned long fallos;     /* accesos que encontraron valid=1, present=0 */
-    unsigned long reemplazos; /* desalojos por politica (fase 6)            */
+    unsigned long reemplazos; /* desalojos por la politica de reemplazo     */
     unsigned long ilegales;   /* accesos a paginas con valid=0              */
+    unsigned long no_alineados; /* read/write a una direccion no multiplo de 4 */
 
     /*
-     * Desalojos de paginas con dirty = 1. No lo pide el enunciado: es material
-     * para el analisis, porque cada uno seria una escritura a disco en un SO
-     * real y es una diferencia medible entre politicas.
+     * Desalojos de paginas con dirty = 1: cada uno escribe la pagina al swap. No
+     * lo pide el enunciado: es material para el analisis, porque es una
+     * escritura a disco en un SO real y una diferencia medible entre politicas.
      */
     unsigned long desalojos_sucios;
+
+    /* Fallos atendidos copiando la pagina desde el swap (el resto se atienden
+       con un marco en ceros: primer acceso o pagina que nunca se escribio). */
+    unsigned long lecturas_swap;
 
     /* Tiempo de CPU que tardo la simulacion, en segundos. Es lo unico que no es
        un conteo: lo mide quien ejecuta el ciclo principal. */
@@ -39,6 +44,8 @@ void stats_registrar_fallo(stats_t *s);
 void stats_registrar_reemplazo(stats_t *s);
 void stats_registrar_ilegal(stats_t *s);
 void stats_registrar_desalojo_sucio(stats_t *s);
+void stats_registrar_lectura_swap(stats_t *s);
+void stats_registrar_no_alineado(stats_t *s);
 
 void stats_registrar_tiempo_cpu(stats_t *s, double segundos);
 

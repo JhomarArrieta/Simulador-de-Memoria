@@ -14,7 +14,7 @@ memoria_fisica_t *physmem_crear(size_t kb)
     int               num_marcos;
     int               i;
 
-    if (kb < MEMORIA_FISICA_KB_MINIMA) {
+    if (kb < MEMORIA_FISICA_KB_MINIMA || kb > MEMORIA_FISICA_KB_MAXIMA) {
         return NULL;
     }
 
@@ -47,6 +47,7 @@ memoria_fisica_t *physmem_crear(size_t kb)
      */
     for (i = 0; i < num_marcos; i++) {
         mf->marcos[i].siguiente = i + 1;
+        mf->marcos[i].slot_swap = -1;
     }
     mf->marcos[num_marcos - 1].siguiente = -1;
     mf->head_libre = 0;
@@ -84,7 +85,7 @@ int physmem_tomar_marco(memoria_fisica_t *mf, uint32_t vpn)
 
     if (mf->head_libre < 0) {
         assert(mf->num_libres == 0);
-        return -1; /* memoria llena: aqui entrara la politica de reemplazo */
+        return -1; /* memoria llena: fallos.c pide una victima a la politica */
     }
 
     marco          = mf->head_libre;
@@ -94,6 +95,7 @@ int physmem_tomar_marco(memoria_fisica_t *mf, uint32_t vpn)
     mf->marcos[marco].ocupado   = 1;
     mf->marcos[marco].vpn       = vpn;
     mf->marcos[marco].siguiente = -1;
+    mf->marcos[marco].slot_swap = -1;
 
     /* Demand zeroing: la pagina que se entrega no debe mostrar los datos del
        proceso (o de la pagina) que ocupaba antes ese marco. */
@@ -110,6 +112,7 @@ void physmem_devolver_marco(memoria_fisica_t *mf, int marco)
 
     mf->marcos[marco].ocupado   = 0;
     mf->marcos[marco].vpn       = 0;
+    mf->marcos[marco].slot_swap = -1;
     mf->marcos[marco].siguiente = mf->head_libre;
     mf->head_libre              = marco;
     mf->num_libres++;
@@ -123,20 +126,53 @@ uint32_t physmem_vpn_de(const memoria_fisica_t *mf, int marco)
     return mf->marcos[marco].vpn;
 }
 
-void physmem_escribir_byte(memoria_fisica_t *mf, uint32_t pa, unsigned char valor)
+long physmem_slot_swap(const memoria_fisica_t *mf, int marco)
 {
     assert(mf != NULL);
-    /* Una PA fuera de rango significa que la traduccion produjo basura: es un bug
-       del simulador, no un error del programa de entrada. */
-    assert(pa < (uint32_t) mf->num_marcos * TAM_PAGINA);
-    mf->datos[pa] = valor;
+    assert(marco >= 0 && marco < mf->num_marcos && mf->marcos[marco].ocupado);
+    return mf->marcos[marco].slot_swap;
 }
 
-unsigned char physmem_leer_byte(const memoria_fisica_t *mf, uint32_t pa)
+void physmem_fijar_slot_swap(memoria_fisica_t *mf, int marco, long slot)
 {
     assert(mf != NULL);
-    assert(pa < (uint32_t) mf->num_marcos * TAM_PAGINA);
-    return mf->datos[pa];
+    assert(marco >= 0 && marco < mf->num_marcos && mf->marcos[marco].ocupado);
+    mf->marcos[marco].slot_swap = slot;
+}
+
+unsigned char *physmem_datos_marco(memoria_fisica_t *mf, int marco)
+{
+    assert(mf != NULL);
+    assert(marco >= 0 && marco < mf->num_marcos);
+    return mf->datos + (size_t) marco * TAM_PAGINA;
+}
+
+const unsigned char *physmem_datos_marco_const(const memoria_fisica_t *mf, int marco)
+{
+    assert(mf != NULL);
+    assert(marco >= 0 && marco < mf->num_marcos);
+    return mf->datos + (size_t) marco * TAM_PAGINA;
+}
+
+void physmem_escribir_palabra(memoria_fisica_t *mf, uint32_t pa, uint32_t valor)
+{
+    assert(mf != NULL);
+    /* Una PA fuera de rango o desalineada significa que la traduccion produjo
+       basura: es un bug del simulador, no un error del programa de entrada. */
+    assert(pa % TAM_PALABRA == 0);
+    assert((size_t) pa + TAM_PALABRA <= (size_t) mf->num_marcos * TAM_PAGINA);
+    memcpy(mf->datos + pa, &valor, TAM_PALABRA); /* memcpy evita accesos desalineados */
+}
+
+uint32_t physmem_leer_palabra(const memoria_fisica_t *mf, uint32_t pa)
+{
+    uint32_t valor;
+
+    assert(mf != NULL);
+    assert(pa % TAM_PALABRA == 0);
+    assert((size_t) pa + TAM_PALABRA <= (size_t) mf->num_marcos * TAM_PAGINA);
+    memcpy(&valor, mf->datos + pa, TAM_PALABRA);
+    return valor;
 }
 
 size_t physmem_memoria_usada(const memoria_fisica_t *mf)

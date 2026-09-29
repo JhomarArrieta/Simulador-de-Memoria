@@ -18,7 +18,8 @@ typedef char verificacion_tam_pte[(sizeof(pte_t) == 4) ? 1 : -1];
 static tabla_nivel2_t *obtener_tabla(directorio_t *dir, uint32_t pt1);
 static int             reservar_espacio_registro(directorio_t *dir);
 static uint32_t        liberar_rango(directorio_t *dir, memoria_fisica_t *mem,
-                                     uint32_t vpn_inicio, uint32_t paginas);
+                                     area_swap_t *swap, uint32_t vpn_inicio,
+                                     uint32_t paginas);
 
 directorio_t *pagetable_crear(void)
 {
@@ -139,7 +140,7 @@ resultado_alloc_t pagetable_alloc(directorio_t *dir, uint32_t bytes,
             /* Sin memoria a mitad del alloc: se deshace lo marcado para que el
                espacio virtual quede exactamente como estaba. Todavia no hay
                marcos asignados, asi que no hace falta la memoria fisica. */
-            liberar_rango(dir, NULL, vpn_inicio, i);
+            liberar_rango(dir, NULL, NULL, vpn_inicio, i);
             return ALLOC_SIN_MEMORIA;
         }
 
@@ -152,6 +153,7 @@ resultado_alloc_t pagetable_alloc(directorio_t *dir, uint32_t bytes,
         pte->present  = 0;
         pte->accessed = 0;
         pte->dirty    = 0;
+        pte->swapped  = 0;
         pte->pfn      = 0;
         tabla->paginas_validas++;
     }
@@ -167,12 +169,13 @@ resultado_alloc_t pagetable_alloc(directorio_t *dir, uint32_t bytes,
 }
 
 /*
- * Invalida un rango de paginas y devuelve cuantos marcos se liberaron. 'mem'
- * puede ser NULL cuando se sabe que ninguna pagina esta presente (el rollback de
- * alloc). Tambien colapsa las tablas de nivel 2 que quedan sin paginas validas.
+ * Invalida un rango de paginas y devuelve cuantos marcos se liberaron. 'mem' y
+ * 'swap' pueden ser NULL cuando se sabe que ninguna pagina esta presente ni en
+ * swap (el rollback de alloc). Tambien colapsa las tablas de nivel 2 que quedan
+ * sin paginas validas.
  */
 static uint32_t liberar_rango(directorio_t *dir, memoria_fisica_t *mem,
-                              uint32_t vpn_inicio, uint32_t paginas)
+                              area_swap_t *swap, uint32_t vpn_inicio, uint32_t paginas)
 {
     uint32_t i;
     uint32_t marcos_liberados = 0;
@@ -192,16 +195,26 @@ static uint32_t liberar_rango(directorio_t *dir, memoria_fisica_t *mem,
             continue;
         }
 
-        /* Si la pagina tenia marco, el marco vuelve a la lista de libres. */
+        /* Si la pagina tenia marco, el marco vuelve a la lista de libres, y si
+           tenia copia en swap, el slot vuelve al area de swap. Mientras la pagina
+           esta presente el slot vive en el marco; fuera de memoria, en el pfn. */
         if (pte->present && mem != NULL) {
+            long slot = physmem_slot_swap(mem, (int) pte->pfn);
+
+            if (slot >= 0 && swap != NULL) {
+                swap_liberar(swap, (uint32_t) slot);
+            }
             physmem_devolver_marco(mem, (int) pte->pfn);
             marcos_liberados++;
+        } else if (pte->swapped && swap != NULL) {
+            swap_liberar(swap, pte->pfn);
         }
 
         pte->valid    = 0;
         pte->present  = 0;
         pte->accessed = 0;
         pte->dirty    = 0;
+        pte->swapped  = 0;
         pte->pfn      = 0;
         tabla->paginas_validas--;
 
@@ -218,12 +231,13 @@ static uint32_t liberar_rango(directorio_t *dir, memoria_fisica_t *mem,
     return marcos_liberados;
 }
 
-resultado_free_t pagetable_free(directorio_t *dir, memoria_fisica_t *mem, uint32_t va,
-                                uint32_t *paginas_liberadas, uint32_t *marcos_liberados)
+resultado_free_t pagetable_free(directorio_t *dir, memoria_fisica_t *mem, area_swap_t *swap,
+                                uint32_t va, uint32_t *paginas_liberadas,
+                                uint32_t *marcos_liberados)
 {
     size_t i;
 
-    assert(dir != NULL && mem != NULL);
+    assert(dir != NULL && mem != NULL && swap != NULL);
     assert(paginas_liberadas != NULL && marcos_liberados != NULL);
 
     *paginas_liberadas = 0;
@@ -237,7 +251,7 @@ resultado_free_t pagetable_free(directorio_t *dir, memoria_fisica_t *mem, uint32
         }
 
         *paginas_liberadas = dir->asignaciones[i].paginas;
-        *marcos_liberados  = liberar_rango(dir, mem, dir->asignaciones[i].vpn_inicio,
+        *marcos_liberados  = liberar_rango(dir, mem, swap, dir->asignaciones[i].vpn_inicio,
                                            dir->asignaciones[i].paginas);
 
         /* Se saca del registro moviendo la ultima entrada al hueco: el orden del

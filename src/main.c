@@ -1,8 +1,8 @@
 /*
  * main.c - ciclo principal del simulador de memoria virtual.
  *
- * Fase 8: la salida por defecto es exactamente el bloque de estadisticas que pide
- * el enunciado. La traza por comando y los tamanos de las estructuras quedan
+ * La salida por defecto es exactamente el bloque de estadisticas que pide
+ * el enunciado, mas las lineas de tiempo. La traza por comando y los tamanos de las estructuras quedan
  * detras de -v, para que la salida especificada no se pierda entre cientos de
  * lineas de traza.
  */
@@ -13,6 +13,7 @@
 #include "physmem.h"
 #include "replace.h"
 #include "stats.h"
+#include "swap.h"
 
 #include <errno.h>
 #include <inttypes.h>
@@ -36,6 +37,7 @@ typedef struct {
 typedef struct {
     directorio_t     *dir;
     memoria_fisica_t *mem;
+    area_swap_t      *swap;
     stats_t           stats;
     int               verboso;
     int               errores; /* comandos validos que no se pudieron ejecutar */
@@ -45,7 +47,6 @@ static int  parsear_opciones(int argc, char *argv[], opciones_t *op);
 static void mostrar_uso(const char *programa);
 static void mostrar_configuracion(const directorio_t *dir, const memoria_fisica_t *mem);
 static int  procesar_archivo(simulador_t *sim, const char *ruta);
-static void descartar_resto_de_linea(FILE *entrada);
 static void ejecutar_comando(simulador_t *sim, long numero_linea, const comando_t *cmd);
 static void ejecutar_alloc(simulador_t *sim, long numero_linea, const comando_t *cmd);
 static void ejecutar_free(simulador_t *sim, long numero_linea, const comando_t *cmd);
@@ -81,9 +82,18 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
+    sim.swap = swap_crear();
+    if (sim.swap == NULL) {
+        fprintf(stderr, "error: sin memoria para el area de swap\n");
+        physmem_destruir(sim.mem);
+        pagetable_destruir(sim.dir);
+        return EXIT_FAILURE;
+    }
+
     /* La politica se prepara con el numero real de marcos. */
     if (!politica_init(op.politica, physmem_num_marcos(sim.mem))) {
         fprintf(stderr, "error: sin memoria para la politica de reemplazo\n");
+        swap_destruir(sim.swap);
         physmem_destruir(sim.mem);
         pagetable_destruir(sim.dir);
         return EXIT_FAILURE;
@@ -109,6 +119,7 @@ int main(int argc, char *argv[])
     /* Todo lo que se pidio con calloc se libera aqui: valgrind debe salir limpio
        incluso cuando la corrida termina en error. */
     politica_liberar();
+    swap_destruir(sim.swap);
     physmem_destruir(sim.mem);
     pagetable_destruir(sim.dir);
 
@@ -116,7 +127,7 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
     if (lineas_malas > 0) {
-        fprintf(stderr, "aviso: se ignoraron %d linea(s) mal formada(s)\n", lineas_malas);
+        fprintf(stderr, "aviso: se ignoraron %d comando(s) mal formado(s)\n", lineas_malas);
     }
     if (sim.errores > 0) {
         fprintf(stderr, "aviso: %d comando(s) no se pudieron ejecutar\n", sim.errores);
@@ -168,6 +179,16 @@ static int parsear_opciones(int argc, char *argv[], opciones_t *op)
                         MEMORIA_FISICA_KB_MINIMA);
                 return 0;
             }
+            if (op->memoria_kb > MEMORIA_FISICA_KB_MAXIMA) {
+                fprintf(stderr, "error: la memoria fisica maxima del simulador es %u KB\n",
+                        MEMORIA_FISICA_KB_MAXIMA);
+                return 0;
+            }
+            if (op->memoria_kb % (TAM_PAGINA / 1024u) != 0) {
+                fprintf(stderr, "error: la memoria fisica debe ser multiplo del tamano de "
+                        "pagina (%u KB)\n", TAM_PAGINA / 1024u);
+                return 0;
+            }
         } else if (strcmp(argv[i], "-v") == 0) {
             op->verboso = 1;
         } else if (argv[i][0] == '-') {
@@ -193,15 +214,17 @@ static void mostrar_uso(const char *programa)
     fprintf(stderr, "uso: %s <archivo_entrada> [-p lru|fifo] [-m <KB_memoria_fisica>]\n",
             programa);
     fprintf(stderr, "  -p  politica de reemplazo (por defecto lru)\n");
-    fprintf(stderr, "  -m  memoria fisica en KB (por defecto %d, minimo %d)\n",
-            MEMORIA_FISICA_KB_DEFECTO, MEMORIA_FISICA_KB_MINIMA);
+    fprintf(stderr, "  -m  memoria fisica en KB (por defecto %d, minimo %d, maximo %u)\n",
+            MEMORIA_FISICA_KB_DEFECTO, MEMORIA_FISICA_KB_MINIMA, MEMORIA_FISICA_KB_MAXIMA);
+    fprintf(stderr, "  el tamano de pagina se elige al compilar: make PAGE_BITS=<10..16> "
+            "(actual: %u B)\n", TAM_PAGINA);
     fprintf(stderr, "  -v  traza cada comando y muestra el tamano de las estructuras\n");
     fprintf(stderr, "ejemplo: %s tests/t2_localidad.txt -p fifo -m 512\n", programa);
 }
 
 /*
- * Bloque provisional de la fase 2: deja ver que las estructuras se crearon con el
- * tamano esperado. Los sizeof salen del compilador, no de una cuenta a mano.
+ * Configuracion y tamano de las estructuras, solo con -v. Los sizeof salen del
+ * compilador, no de una cuenta a mano.
  */
 static void mostrar_configuracion(const directorio_t *dir, const memoria_fisica_t *mem)
 {
@@ -209,13 +232,14 @@ static void mostrar_configuracion(const directorio_t *dir, const memoria_fisica_
 
     printf("=== configuracion ===\n");
     printf("tamano de pagina  : %u B\n", TAM_PAGINA);
-    printf("espacio virtual   : 32 bits, %u paginas posibles\n", PAGINAS_VIRTUALES);
+    printf("espacio virtual   : 32 bits = PT1 %d b | PT2 %d b | offset %d b, %u paginas posibles\n",
+           BITS_NIVEL1, BITS_NIVEL2, BITS_OFFSET, PAGINAS_VIRTUALES);
     printf("politica          : %s\n", politica_nombre());
     printf("memoria fisica    : %d KB, %d marcos (%d libres)\n",
            physmem_num_marcos(mem) * (int) (TAM_PAGINA / 1024),
            physmem_num_marcos(mem), physmem_num_libres(mem));
-    printf("pte_t             : %zu B (pfn 20 b + valid + present + accessed + dirty)\n",
-           sizeof(pte_t));
+    printf("pte_t             : %zu B (pfn %d b + valid + present + accessed + dirty + swapped)\n",
+           sizeof(pte_t), BITS_PFN);
     printf("tabla_nivel2_t    : %zu B (%u entradas, cubre %lu B de espacio virtual)\n",
            sizeof(tabla_nivel2_t), ENTRADAS_NIVEL2, BYTES_POR_TABLA_NIVEL2);
     printf("directorio_t      : %zu B (%u punteros), tablas de nivel 2 vivas: %zu\n",
@@ -228,17 +252,17 @@ static void mostrar_configuracion(const directorio_t *dir, const memoria_fisica_
 }
 
 /*
- * Lee el archivo completo y muestra cada comando parseado.
- * Devuelve cuantas lineas mal formadas se ignoraron, o -1 si el archivo no se
- * pudo abrir. Una linea invalida no aborta la corrida: se avisa y se sigue, para
+ * Lee el archivo completo y ejecuta cada comando.
+ * Devuelve cuantos comandos mal formados se ignoraron, o -1 si el archivo no se
+ * pudo abrir. Un comando invalido no aborta la corrida: se avisa y se sigue, para
  * que un typo en la linea 300 de una prueba no tire las 299 anteriores.
  */
 static int procesar_archivo(simulador_t *sim, const char *ruta)
 {
-    FILE *entrada;
-    char  linea[MAX_LINEA];
-    long  numero_linea = 0;
-    int   lineas_malas = 0;
+    FILE     *entrada;
+    lector_t  lector;
+    comando_t cmd;
+    int       comandos_malos = 0;
 
     entrada = fopen(ruta, "r");
     if (entrada == NULL) {
@@ -246,48 +270,18 @@ static int procesar_archivo(simulador_t *sim, const char *ruta)
         return -1;
     }
 
-    while (fgets(linea, (int) sizeof linea, entrada) != NULL) {
-        comando_t cmd;
-
-        numero_linea++;
-
-        /* Sin '\n' y sin haber llegado al final del archivo, la linea no cabio en
-           el buffer. Se descarta entera para no partirla en dos comandos falsos. */
-        if (strchr(linea, '\n') == NULL && !feof(entrada)) {
-            fprintf(stderr, "[linea %ld] ignorada: la linea excede %d caracteres\n",
-                    numero_linea, MAX_LINEA - 2);
-            descartar_resto_de_linea(entrada);
-            lineas_malas++;
+    parser_iniciar(&lector, entrada);
+    while (parser_siguiente_comando(&lector, &cmd)) {
+        if (cmd.tipo == CMD_ERROR) {
+            fprintf(stderr, "[linea %ld] comando ignorado: %s\n", cmd.linea, cmd.motivo);
+            comandos_malos++;
             continue;
         }
-
-        parser_parsear_linea(linea, &cmd);
-
-        switch (cmd.tipo) {
-        case CMD_IGNORAR:
-            break; /* linea vacia o comentario */
-        case CMD_ERROR:
-            fprintf(stderr, "[linea %ld] ignorada: %s\n", numero_linea, cmd.motivo);
-            lineas_malas++;
-            break;
-        default:
-            ejecutar_comando(sim, numero_linea, &cmd);
-            break;
-        }
+        ejecutar_comando(sim, cmd.linea, &cmd);
     }
 
     fclose(entrada);
-    return lineas_malas;
-}
-
-/* Consume lo que quede de una linea que no cupo en el buffer. */
-static void descartar_resto_de_linea(FILE *entrada)
-{
-    int c;
-
-    while ((c = fgetc(entrada)) != '\n' && c != EOF) {
-        /* nada que hacer: solo avanzar */
-    }
+    return comandos_malos;
 }
 
 /* Despacha un comando ya parseado. */
@@ -304,9 +298,8 @@ static void ejecutar_comando(simulador_t *sim, long numero_linea, const comando_
     case CMD_WRITE:
         ejecutar_acceso(sim, numero_linea, cmd);
         break;
-    case CMD_IGNORAR:
     case CMD_ERROR:
-        break; /* no llegan aqui */
+        break; /* procesar_archivo los filtra antes */
     }
 }
 
@@ -348,7 +341,7 @@ static void ejecutar_free(simulador_t *sim, long numero_linea, const comando_t *
     uint32_t paginas;
     uint32_t marcos;
 
-    switch (pagetable_free(sim->dir, sim->mem, cmd->direccion, &paginas, &marcos)) {
+    switch (pagetable_free(sim->dir, sim->mem, sim->swap, cmd->direccion, &paginas, &marcos)) {
     case FREE_OK:
         if (!sim->verboso) {
             break;
@@ -376,23 +369,18 @@ static void ejecutar_free(simulador_t *sim, long numero_linea, const comando_t *
  */
 static void ejecutar_acceso(simulador_t *sim, long numero_linea, const comando_t *cmd)
 {
-    int      es_escritura = (cmd->tipo == CMD_WRITE);
-    acceso_t acc;
+    int               es_escritura = (cmd->tipo == CMD_WRITE);
+    sistema_memoria_t sis;
+    acceso_t          acc;
+
+    sis.dir  = sim->dir;
+    sis.mem  = sim->mem;
+    sis.swap = sim->swap;
 
     if (es_escritura) {
-        unsigned char valor;
-
-        /* La memoria guarda un byte por direccion, asi que un valor mas grande no
-           cabe. Se avisa y se trunca en vez de descartar el acceso. */
-        if (cmd->valor > 0xFFu) {
-            fprintf(stderr, "[linea %ld] aviso: el valor %" PRIu32
-                    " no cabe en un byte, se guarda %" PRIu32 "\n",
-                    numero_linea, cmd->valor, cmd->valor & 0xFFu);
-        }
-        valor = (unsigned char) (cmd->valor & 0xFFu);
-        acc   = acceso_escribir(sim->dir, sim->mem, &sim->stats, cmd->direccion, valor);
+        acc = acceso_escribir(&sis, &sim->stats, cmd->direccion, cmd->valor);
     } else {
-        acc = acceso_leer(sim->dir, sim->mem, &sim->stats, cmd->direccion);
+        acc = acceso_leer(&sis, &sim->stats, cmd->direccion);
     }
 
     switch (acc.resultado) {
@@ -401,9 +389,16 @@ static void ejecutar_acceso(simulador_t *sim, long numero_linea, const comando_t
         if (!sim->verboso) {
             break;
         }
-        printf("[linea %3ld] %-5s 0x%08" PRIX32 " = %-3u -> %-5s marco %2d, PA 0x%08" PRIX32 "\n",
+        printf("[linea %3ld] %-5s 0x%08" PRIX32 " = %-10" PRIu32 " -> %-5s marco %2d, PA 0x%08" PRIX32,
                numero_linea, es_escritura ? "write" : "read", cmd->direccion, acc.valor,
                acceso_nombre_resultado(acc.resultado), acc.marco, acc.pa);
+        if (acc.desde_swap) {
+            printf(", traida del swap");
+        }
+        if (acc.vpn_victima >= 0) {
+            printf(", desaloja la pagina 0x%05lX", (unsigned long) acc.vpn_victima);
+        }
+        printf("\n");
         break;
     case ACCESO_ILEGAL:
         /* Falla el programa simulado, no el simulador: se cuenta en las
@@ -412,11 +407,16 @@ static void ejecutar_acceso(simulador_t *sim, long numero_linea, const comando_t
                 " (valid=0, esa pagina no fue asignada)\n",
                 numero_linea, es_escritura ? "write" : "read", cmd->direccion);
         break;
-    case ACCESO_SIN_MARCOS:
-        /* Con la politica de reemplazo activa esto ya no deberia ocurrir nunca:
-           si ocurre, es un error interno del simulador. */
+    case ACCESO_NO_ALINEADO:
+        fprintf(stderr, "[linea %ld] acceso no alineado: %s 0x%08" PRIX32
+                " (la direccion de una palabra de 32 bits debe ser multiplo de 4)\n",
+                numero_linea, es_escritura ? "write" : "read", cmd->direccion);
+        break;
+    case ACCESO_ERROR_INTERNO:
+        /* Con la politica de reemplazo activa esto solo ocurre si el simulador se
+           queda sin memoria para el swap o si sus estructuras se desincronizan. */
         fprintf(stderr, "[linea %ld] error interno: %s 0x%08" PRIX32
-                " no consiguio marco ni despues de desalojar\n",
+                " no consiguio marco (sin memoria para el swap)\n",
                 numero_linea, es_escritura ? "write" : "read", cmd->direccion);
         sim->errores++;
         break;
@@ -432,5 +432,7 @@ static void mostrar_detalle_final(const simulador_t *sim)
     printf("marcos ocupados              : %d de %d\n",
            physmem_num_marcos(sim->mem) - physmem_num_libres(sim->mem),
            physmem_num_marcos(sim->mem));
+    printf("slots de swap en uso / pico  : %zu / %zu\n", swap_slots_en_uso(sim->swap),
+           swap_pico_slots(sim->swap));
     stats_imprimir_detalle(&sim->stats);
 }

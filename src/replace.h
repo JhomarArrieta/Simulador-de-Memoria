@@ -20,10 +20,9 @@ typedef enum {
 } politica_t;
 
 /*
- * Prepara la politica para num_marcos marcos. Devuelve 0 si no hubo memoria.
- * (Unica diferencia con la interfaz de CLAUDE.md: devuelve int en vez de void,
- * para que un fallo de calloc no se trague en silencio ni obligue al modulo a
- * llamar a exit.)
+ * Prepara la politica para num_marcos marcos. Devuelve 0 si no hubo memoria:
+ * devuelve int y no void para que un fallo de calloc no se trague en silencio
+ * ni obligue al modulo a llamar a exit.
  */
 int politica_init(politica_t p, int num_marcos);
 

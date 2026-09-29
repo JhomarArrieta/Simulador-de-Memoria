@@ -48,7 +48,9 @@ analizar trade-offs.
 
 ## Entrada y salida
 
-El programa acepta un archivo de entrada con comandos:
+El programa acepta un archivo de entrada con comandos. En el PDF, tanto el formato
+como el ejemplo aparecen en una sola línea; el simulador acepta ese formato y el de
+un comando por línea.
 
 ```
 alloc <bytes>

@@ -1,5 +1,5 @@
 /*
- * parser.c - implementacion del parseo de comandos.
+ * parser.c - lector de tokens y conversion a comandos.
  */
 #include "parser.h"
 
@@ -8,24 +8,101 @@
 #include <stdlib.h>
 #include <string.h>
 
-/* Separadores de tokens. Incluimos '\r' y '\n' para que la linea que devuelve
-   fgets no necesite limpiarse antes, y para tolerar archivos con finales de
-   linea de Windows (CRLF). */
-#define DELIMITADORES " \t\r\n"
+void parser_iniciar(lector_t *lector, FILE *entrada)
+{
+    lector->entrada       = entrada;
+    lector->linea         = 1;
+    lector->hay_pendiente = 0;
+}
 
 /*
- * Siguiente token de la linea que se esta tokenizando, o NULL si ya no hay mas.
- * Un token que empieza con '#' se trata como inicio de comentario, de modo que
- * "read 0 # nota" es valido y el resto de la linea se descarta.
+ * Lee el siguiente token del archivo. Devuelve 1 si hay token y 0 en EOF.
+ * En *linea deja la linea donde empieza el token y en *largo un 1 si el token
+ * no cupo en MAX_TOKEN (se trunca y el llamador lo reporta como invalido).
  */
-static const char *siguiente_token(void)
+static int leer_token(lector_t *lector, char *token, long *linea, int *largo)
 {
-    const char *token = strtok(NULL, DELIMITADORES);
+    int    c;
+    size_t n = 0;
 
-    if (token != NULL && token[0] == '#') {
-        return NULL;
+    if (lector->hay_pendiente) {
+        memcpy(token, lector->pendiente, MAX_TOKEN);
+        *linea                = lector->linea_pendiente;
+        *largo                = lector->pendiente_largo;
+        lector->hay_pendiente = 0;
+        return 1;
     }
-    return token;
+
+    /* Saltar espacios y comentarios, contando los saltos de linea. */
+    for (;;) {
+        c = fgetc(lector->entrada);
+        if (c == EOF) {
+            return 0;
+        }
+        if (c == '\n') {
+            lector->linea++;
+        } else if (c == '#') {
+            while ((c = fgetc(lector->entrada)) != '\n' && c != EOF) {
+                /* el comentario llega hasta el fin de la linea */
+            }
+            if (c == EOF) {
+                return 0;
+            }
+            lector->linea++;
+        } else if (!isspace((unsigned char) c)) {
+            break;
+        }
+    }
+
+    *linea = lector->linea;
+    *largo = 0;
+    while (c != EOF && !isspace((unsigned char) c) && c != '#') {
+        if (n < MAX_TOKEN - 1) {
+            token[n++] = (char) c;
+        } else {
+            *largo = 1;
+        }
+        c = fgetc(lector->entrada);
+    }
+    token[n] = '\0';
+
+    /* El caracter que corto el token se devuelve al flujo para que el '\n' se
+       cuente y el '#' abra su comentario en la siguiente llamada. */
+    if (c != EOF) {
+        ungetc(c, lector->entrada);
+    }
+    return 1;
+}
+
+/* Devuelve un token al lector: la siguiente leer_token lo entrega de nuevo. */
+static void devolver_token(lector_t *lector, const char *token, long linea, int largo)
+{
+    memcpy(lector->pendiente, token, MAX_TOKEN);
+    lector->linea_pendiente = linea;
+    lector->pendiente_largo = largo;
+    lector->hay_pendiente   = 1;
+}
+
+/* Numero de argumentos del verbo, o -1 si el token no es un verbo. */
+static int argumentos_de(const char *verbo, tipo_comando_t *tipo)
+{
+    if (strcmp(verbo, "alloc") == 0) {
+        *tipo = CMD_ALLOC;
+        return 1;
+    }
+    if (strcmp(verbo, "write") == 0) {
+        *tipo = CMD_WRITE;
+        return 2;
+    }
+    if (strcmp(verbo, "read") == 0) {
+        *tipo = CMD_READ;
+        return 1;
+    }
+    if (strcmp(verbo, "free") == 0) {
+        *tipo = CMD_FREE;
+        return 1;
+    }
+    return -1;
 }
 
 /*
@@ -65,7 +142,7 @@ int parser_leer_uint32(const char *token, uint32_t *destino)
         return 0; /* desbordamiento, o basura despues del numero */
     }
     if (valor > 0xFFFFFFFFUL) {
-        return 0; /* no cabe en una direccion virtual de 32 bits */
+        return 0; /* no cabe en 32 bits */
     }
 
     *destino = (uint32_t) valor;
@@ -79,65 +156,69 @@ static void marcar_error(comando_t *cmd, const char *motivo)
     cmd->motivo = motivo;
 }
 
-void parser_parsear_linea(char *linea, comando_t *cmd)
+int parser_siguiente_comando(lector_t *lector, comando_t *cmd)
 {
-    const char *verbo;    /* punteros al propio buffer: se leen, nunca se escriben */
-    const char *arg1;
-    const char *arg2;
-    const char *sobrante;
+    char           verbo[MAX_TOKEN];
+    char           argumento[MAX_TOKEN];
+    uint32_t       numeros[2] = {0, 0};
+    tipo_comando_t tipo;
+    tipo_comando_t tipo_argumento;
+    long           linea;
+    int            largo;
+    int            necesarios;
+    int            i;
 
-    /* Estado inicial limpio: quien lea el comando solo deberia mirar los campos
-       que corresponden a su tipo, pero dejarlos en cero evita basura al depurar. */
-    cmd->tipo      = CMD_IGNORAR;
     cmd->direccion = 0;
     cmd->bytes     = 0;
     cmd->valor     = 0;
     cmd->motivo    = NULL;
 
-    verbo = strtok(linea, DELIMITADORES);
-    if (verbo == NULL || verbo[0] == '#') {
-        return; /* linea vacia o comentario: se ignora sin contarla como error */
+    if (!leer_token(lector, verbo, &linea, &largo)) {
+        return 0; /* fin del archivo */
     }
+    cmd->linea = linea;
 
-    /* Los argumentos se piden en cadena: si falta uno, no tiene sentido seguir
-       tokenizando en busca de sobrantes. */
-    arg1     = siguiente_token();
-    arg2     = (arg1 != NULL) ? siguiente_token() : NULL;
-    sobrante = (arg2 != NULL) ? siguiente_token() : NULL;
-
-    if (strcmp(verbo, "alloc") == 0) {
-        if (arg1 == NULL) {
-            marcar_error(cmd, "alloc necesita el numero de bytes");
-        } else if (arg2 != NULL) {
-            marcar_error(cmd, "alloc recibe un solo argumento");
-        } else if (!parser_leer_uint32(arg1, &cmd->bytes)) {
-            marcar_error(cmd, "el numero de bytes de alloc no es valido");
-        } else {
-            cmd->tipo = CMD_ALLOC;
-        }
-    } else if (strcmp(verbo, "write") == 0) {
-        if (arg1 == NULL || arg2 == NULL) {
-            marcar_error(cmd, "write necesita direccion y valor");
-        } else if (sobrante != NULL) {
-            marcar_error(cmd, "write recibe exactamente dos argumentos");
-        } else if (!parser_leer_uint32(arg1, &cmd->direccion)) {
-            marcar_error(cmd, "la direccion de write no es valida");
-        } else if (!parser_leer_uint32(arg2, &cmd->valor)) {
-            marcar_error(cmd, "el valor de write no es valido");
-        } else {
-            cmd->tipo = CMD_WRITE;
-        }
-    } else if (strcmp(verbo, "read") == 0 || strcmp(verbo, "free") == 0) {
-        if (arg1 == NULL) {
-            marcar_error(cmd, "read y free necesitan una direccion");
-        } else if (arg2 != NULL) {
-            marcar_error(cmd, "read y free reciben un solo argumento");
-        } else if (!parser_leer_uint32(arg1, &cmd->direccion)) {
-            marcar_error(cmd, "la direccion no es valida");
-        } else {
-            cmd->tipo = (verbo[0] == 'r') ? CMD_READ : CMD_FREE;
-        }
-    } else {
+    necesarios = largo ? -1 : argumentos_de(verbo, &tipo);
+    if (necesarios < 0) {
         marcar_error(cmd, "comando desconocido");
+        return 1;
     }
+
+    for (i = 0; i < necesarios; i++) {
+        long linea_argumento;
+
+        if (!leer_token(lector, argumento, &linea_argumento, &largo)) {
+            marcar_error(cmd, "faltan argumentos al final del archivo");
+            return 1;
+        }
+        /* Si en lugar del argumento llega otro verbo, el comando esta incompleto.
+           El verbo se devuelve para que el siguiente comando no se pierda. */
+        if (!largo && argumentos_de(argumento, &tipo_argumento) >= 0) {
+            devolver_token(lector, argumento, linea_argumento, largo);
+            marcar_error(cmd, "faltan argumentos");
+            return 1;
+        }
+        if (largo || !parser_leer_uint32(argumento, &numeros[i])) {
+            marcar_error(cmd, "argumento numerico invalido (decimal o 0x hexadecimal, 32 bits)");
+            return 1;
+        }
+    }
+
+    cmd->tipo = tipo;
+    switch (tipo) {
+    case CMD_ALLOC:
+        cmd->bytes = numeros[0];
+        break;
+    case CMD_WRITE:
+        cmd->direccion = numeros[0];
+        cmd->valor     = numeros[1];
+        break;
+    case CMD_READ:
+    case CMD_FREE:
+        cmd->direccion = numeros[0];
+        break;
+    case CMD_ERROR:
+        break; /* argumentos_de nunca devuelve este tipo */
+    }
+    return 1;
 }

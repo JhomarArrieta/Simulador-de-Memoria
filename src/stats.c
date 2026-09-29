@@ -50,6 +50,18 @@ void stats_registrar_desalojo_sucio(stats_t *s)
     s->desalojos_sucios++;
 }
 
+void stats_registrar_lectura_swap(stats_t *s)
+{
+    assert(s != NULL);
+    s->lecturas_swap++;
+}
+
+void stats_registrar_no_alineado(stats_t *s)
+{
+    assert(s != NULL);
+    s->no_alineados++;
+}
+
 void stats_registrar_tiempo_cpu(stats_t *s, double segundos)
 {
     assert(s != NULL);
@@ -137,9 +149,12 @@ void stats_imprimir_detalle(const stats_t *s)
     printf("lecturas / escrituras        : %lu / %lu\n", s->lecturas, s->escrituras);
     printf("hits                         : %lu\n", hits);
     printf("accesos ilegales (valid=0)   : %lu  (no cuentan como acceso)\n", s->ilegales);
-    printf("desalojos con la pagina sucia: %lu  (escrituras a disco en un SO real)\n",
+    printf("accesos no alineados a 4 B   : %lu  (no cuentan como acceso)\n", s->no_alineados);
+    printf("desalojos con la pagina sucia: %lu  (escrituras al area de swap)\n",
            s->desalojos_sucios);
-    printf("costo de esas escrituras      : %.3f ms  (no incluido en el tiempo simulado)\n",
+    printf("fallos atendidos desde swap  : %lu  (lecturas del area de swap)\n",
+           s->lecturas_swap);
+    printf("costo de esas escrituras     : %.3f ms  (no incluido en el tiempo simulado)\n",
            (double) s->desalojos_sucios * TIEMPO_FALLO_DISCO_NS / 1e6);
 
     /* Suma de control del enunciado: si esto falla, algun contador miente. */

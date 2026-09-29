@@ -1,56 +1,73 @@
-# Resultados medidos (fase 9)
+# Resultados medidos
 
 Configuración: página de 4 KB, memoria física de 256 KB = **64 marcos**, espacio
-virtual de 32 bits. Reproducible con `./simulador tests/<archivo> -p <lru|fifo>`.
+virtual de 32 bits. Reproducible con `./simulador tests/<archivo> -p <lru|fifo> -v`.
+El análisis está en `REPORTE.md` §5 a §7.
 
-## Las seis corridas
+## Las seis pruebas
 
-| Test | Política | Accesos | Fallos | Hit rate | Reemplazos | AMAT | Páginas distintas | Fallos mínimos |
+| Prueba | Política | Accesos | Fallos | Hit rate | Reemplazos | Escrituras a swap | Lecturas de swap | AMAT |
 |---|---|---|---|---|---|---|---|---|
-| `t1_basico.txt`    | LRU  | 4   | 2   | 50,00 % | 0   | 5 000,10 µs | 2   | 2   |
-| `t1_basico.txt`    | FIFO | 4   | 2   | 50,00 % | 0   | 5 000,10 µs | 2   | 2   |
-| `t2_localidad.txt` | LRU  | 60  | 4   | 93,33 % | 0   | 666,77 µs   | 4   | 4   |
-| `t2_localidad.txt` | FIFO | 60  | 4   | 93,33 % | 0   | 666,77 µs   | 4   | 4   |
-| `t3_estres.txt`    | LRU  | 400 | 200 | 50,00 % | 136 | 5 000,10 µs | 100 | 100 |
-| `t3_estres.txt`    | FIFO | 400 | 200 | 50,00 % | 136 | 5 000,10 µs | 100 | 100 |
+| `t1_basico` | LRU | 4 | 2 | 50,00 % | 0 | 0 | 0 | 5 000,1 µs |
+| `t1_basico` | FIFO | 4 | 2 | 50,00 % | 0 | 0 | 0 | 5 000,1 µs |
+| `t2_localidad` | LRU | 60 | 4 | 93,33 % | 0 | 0 | 0 | 666,8 µs |
+| `t2_localidad` | FIFO | 60 | 4 | 93,33 % | 0 | 0 | 0 | 666,8 µs |
+| `t3_estres` | LRU | 400 | 200 | 50,00 % | 136 | 136 | 100 | 5 000,1 µs |
+| `t3_estres` | FIFO | 400 | 200 | 50,00 % | 136 | 136 | 100 | 5 000,1 µs |
+| `t4_localidad_8020` | LRU | 5 000 | 486 | 90,28 % | 422 | 202 | 304 | 972,1 µs |
+| `t4_localidad_8020` | FIFO | 5 000 | 660 | 86,80 % | 596 | 396 | 487 | 1 320,1 µs |
+| `t5_swap` | LRU | 160 | 160 | 0,00 % | 96 | 80 | 80 | 10 000,1 µs |
+| `t5_swap` | FIFO | 160 | 160 | 0,00 % | 96 | 80 | 80 | 10 000,1 µs |
+| `t6_discriminante` | LRU | 71 | 65 | 8,45 % | 1 | 1 | 0 | 9 155,0 µs |
+| `t6_discriminante` | FIFO | 71 | 66 | 7,04 % | 2 | 2 | 1 | 9 295,9 µs |
 
-AMAT = tiempo medio de acceso, con el modelo de 100 ns por acceso a memoria y 10 ms
-por fallo de página (OSTEP cap. 22.1). Un acceso sin fallos costaría 0,1 µs.
+AMAT con 100 ns por acceso a memoria y 10 ms por fallo (OSTEP cap. 22.1).
 
-"Fallos mínimos posibles" son los *compulsory misses*: la primera vez que se toca
-una página, ninguna política puede evitar el fallo.
+## Barrido de memoria: `t4_localidad_8020` (`make barrido`)
 
-- En `t1` y `t2` las dos políticas alcanzan **el mínimo teórico**: ninguna política,
-  ni siquiera la óptima de Belady, podría hacerlo mejor. La memoria nunca se llena
-  (2 y 4 páginas en 64 marcos), así que no hay ni un reemplazo y la política no
-  interviene.
-- En `t3` los fallos son **el doble** del mínimo: la segunda pasada no aprovecha
-  nada de la primera.
+| Memoria | Marcos | Fallos LRU | Fallos FIFO | Hit rate LRU | Hit rate FIFO | Reemplazos LRU | Reemplazos FIFO |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| 256 KB | 64 | 486 | 660 | 90,28 % | 86,80 % | 422 | 596 |
+| 320 KB | 80 | 307 | 375 | 93,86 % | 92,50 % | 227 | 295 |
+| 384 KB | 96 | 135 | 158 | 97,30 % | 96,84 % | 39 | 62 |
+| 448 KB | 112 | 100 | 100 | 98,00 % | 98,00 % | 0 | 0 |
 
-## t3_estres: barrido del tamaño de memoria
+## Barrido de memoria: `estres_grande` (`make stress`, `make barrido TRAZA=tests/estres_grande.txt`)
 
-Las 100 páginas distintas ocupan exactamente 400 KB.
+| Memoria | Marcos | Fallos LRU | Fallos FIFO | Hit rate LRU | Hit rate FIFO |
+|---|---:|---:|---:|---:|---:|
+| 256 KB | 64 | 30 987 | 39 617 | 69,01 % | 60,38 % |
+| 320 KB | 80 | 21 769 | 32 225 | 78,23 % | 67,78 % |
+| 384 KB | 96 | 16 809 | 26 667 | 83,19 % | 73,33 % |
+| 448 KB | 112 | 14 205 | 22 440 | 85,80 % | 77,56 % |
+| 512 KB | 128 | 12 458 | 18 773 | 87,54 % | 81,23 % |
+| 640 KB | 160 | 9 295 | 12 866 | 90,70 % | 87,13 % |
+| 768 KB | 192 | 6 182 | 8 191 | 93,82 % | 91,81 % |
+| 1024 KB | 256 | 256 | 256 | 99,74 % | 99,74 % |
+
+## Barrido de memoria: `t3_estres` (igual con LRU y FIFO)
 
 | Memoria | Marcos | Fallos | Hit rate | Reemplazos | `fallos - marcos` |
 |---|---|---|---|---|---|
-| 256 KB | 64  | 200 | 50,00 % | 136 | 136 |
-| 384 KB | 96  | 200 | 50,00 % | 104 | 104 |
-| 396 KB | 99  | 200 | 50,00 % | 101 | 101 |
-| 400 KB | 100 | 100 | 75,00 % | 0   | —   |
-| 512 KB | 128 | 100 | 75,00 % | 0   | —   |
+| 256 KB | 64 | 200 | 50,00 % | 136 | 136 |
+| 384 KB | 96 | 200 | 50,00 % | 104 | 104 |
+| 396 KB | 99 | 200 | 50,00 % | 101 | 101 |
+| 400 KB | 100 | 100 | 75,00 % | 0 | — |
+| 512 KB | 128 | 100 | 75,00 % | 0 | — |
 
-Idéntico con LRU y con FIFO en las cinco configuraciones.
+## Tamaño de página (`t4_localidad_8020`, 256 KB, `make PAGE_BITS=n`)
 
-Con **99 marcos para 100 páginas** —un solo marco de menos— el resultado es igual
-que con 64 marcos. En 100 marcos cae de golpe a los 100 fallos obligatorios. No hay
-mejora gradual: es un acantilado, el comportamiento clásico del recorrido cíclico.
+| Página | Marcos | Memoria de traducción | Fallos LRU | Fallos FIFO |
+|---|---|---|---|---|
+| 1 KB | 256 | 133 240 B | 601 | 745 |
+| 4 KB | 64 | 12 400 B | 486 | 660 |
+| 16 KB | 16 | 17 008 B | 463 | 638 |
+| 64 KB | 4 | 65 680 B | 540 | 701 |
 
 ## Verificaciones
 
-- `accesos = hits + fallos` en las 6 corridas (y en 28 combinaciones de archivo,
-  política y tamaño de memoria).
-- `reemplazos = fallos - marcos` siempre que la memoria se llena una vez y no se
-  libera: 136 = 200 - 64, 104 = 200 - 96, 101 = 200 - 99.
-- El primer reemplazo ocurre en el **fallo 65**, no antes: el fallo 64 recibe el
-  marco 63 (el último libre) y el fallo 65 reutiliza el marco 0.
-- Fallos por pasada en `t3`: 100 en la primera y 100 en la segunda.
+- `accesos = hits + fallos` en las 12 corridas (`make test`).
+- `reemplazos = fallos - marcos` siempre que la memoria se llena y no se libera:
+  136 = 200 - 64, 422 = 486 - 64, 596 = 660 - 64.
+- `make diferencial`: 400 corridas contra un modelo de referencia, 0 diferencias en
+  fallos, reemplazos y valores leídos.

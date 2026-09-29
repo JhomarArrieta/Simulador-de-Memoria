@@ -39,10 +39,10 @@ uint32_t mmu_pt1(uint32_t va);
 uint32_t mmu_pt2(uint32_t va);
 uint32_t mmu_offset(uint32_t va);
 
-/* Numero de pagina virtual: los 20 bits altos, pt1 << 10 | pt2. */
+/* Numero de pagina virtual: los bits por encima del offset, pt1 << BITS_NIVEL2 | pt2. */
 uint32_t mmu_vpn(uint32_t va);
 
-/* Partes de un vpn, para reportar que pagina se desalojo (fase 6). */
+/* Partes de un vpn, para ubicar la PTE de la pagina que se desaloja. */
 uint32_t mmu_pt1_de_vpn(uint32_t vpn);
 uint32_t mmu_pt2_de_vpn(uint32_t vpn);
 

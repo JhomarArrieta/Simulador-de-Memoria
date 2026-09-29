@@ -1,0 +1,73 @@
+# Prueba 6: pagina antigua pero caliente. LRU: 65 fallos, FIFO: 66
+alloc 266240
+write 0 0
+write 4096 1
+write 8192 2
+write 12288 3
+write 16384 4
+write 20480 5
+write 24576 6
+write 28672 7
+write 32768 8
+write 36864 9
+write 40960 10
+write 45056 11
+write 49152 12
+write 53248 13
+write 57344 14
+write 61440 15
+write 65536 16
+write 69632 17
+write 73728 18
+write 77824 19
+write 81920 20
+write 86016 21
+write 90112 22
+write 94208 23
+write 98304 24
+write 102400 25
+write 106496 26
+write 110592 27
+write 114688 28
+write 118784 29
+write 122880 30
+write 126976 31
+write 131072 32
+write 135168 33
+write 139264 34
+write 143360 35
+write 147456 36
+write 151552 37
+write 155648 38
+write 159744 39
+write 163840 40
+write 167936 41
+write 172032 42
+write 176128 43
+write 180224 44
+write 184320 45
+write 188416 46
+write 192512 47
+write 196608 48
+write 200704 49
+write 204800 50
+write 208896 51
+write 212992 52
+write 217088 53
+write 221184 54
+write 225280 55
+write 229376 56
+write 233472 57
+write 237568 58
+write 241664 59
+write 245760 60
+write 249856 61
+write 253952 62
+write 258048 63
+read 0
+read 0
+read 0
+read 0
+read 0
+write 262144 64
+read 0

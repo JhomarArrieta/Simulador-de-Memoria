@@ -11,6 +11,7 @@
 
 #include "config.h"
 #include "physmem.h"
+#include "swap.h"
 
 #include <stddef.h>
 #include <stdint.h>
@@ -23,13 +24,22 @@
  * La distincion que importa:
  *   valid = 0              -> la pagina nunca se asigno: acceso ilegal.
  *   valid = 1, present = 0 -> la pagina existe pero no esta en memoria: fallo.
+ *
+ * Significado de pfn segun el estado:
+ *   present = 1                -> numero de marco fisico.
+ *   present = 0, swapped = 1   -> numero de slot en el area de swap
+ *                                 (OSTEP cap. 21.3: los bits del PFN guardan la
+ *                                 direccion en disco).
+ *   present = 0, swapped = 0   -> sin uso: la pagina nunca se escribio y se
+ *                                 entrega en ceros en el proximo fallo.
  */
 typedef struct {
-    unsigned int pfn      : 20; /* marco fisico; 20 bits cubren las 2^20 paginas */
+    unsigned int pfn      : BITS_PFN; /* marco fisico: 20 bits con paginas de 4 KB */
     unsigned int valid    : 1;  /* la pagina fue asignada por el proceso */
     unsigned int present  : 1;  /* la pagina esta en memoria fisica */
     unsigned int accessed : 1;  /* referenciada por un read o un write */
-    unsigned int dirty    : 1;  /* modificada por un write */
+    unsigned int dirty    : 1;  /* modificada por un write desde que se cargo */
+    unsigned int swapped  : 1;  /* hay una copia de la pagina en el swap */
 } pte_t;
 
 typedef struct {
@@ -104,10 +114,12 @@ resultado_alloc_t pagetable_alloc(directorio_t *dir, uint32_t bytes,
 /*
  * Libera la asignacion que empieza exactamente en 'va'. Pone valid = 0 en todas
  * sus paginas, devuelve a la lista de libres los marcos de las que estaban
- * presentes y libera las tablas de nivel 2 que queden sin paginas validas.
+ * presentes, libera sus slots de swap y libera las tablas de nivel 2 que queden
+ * sin paginas validas.
  */
-resultado_free_t pagetable_free(directorio_t *dir, memoria_fisica_t *mem, uint32_t va,
-                                uint32_t *paginas_liberadas, uint32_t *marcos_liberados);
+resultado_free_t pagetable_free(directorio_t *dir, memoria_fisica_t *mem, area_swap_t *swap,
+                                uint32_t va, uint32_t *paginas_liberadas,
+                                uint32_t *marcos_liberados);
 
 /* Tablas de nivel 2 vivas y bytes que ocupan las estructuras de traduccion. */
 size_t pagetable_tablas_nivel2(const directorio_t *dir);

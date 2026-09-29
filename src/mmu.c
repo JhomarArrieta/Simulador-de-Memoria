@@ -27,7 +27,7 @@ uint32_t mmu_offset(uint32_t va)
 
 uint32_t mmu_vpn(uint32_t va)
 {
-    /* Equivale a mmu_pt1(va) << BITS_NIVEL2 | mmu_pt2(va): los 20 bits altos. */
+    /* Equivale a mmu_pt1(va) << BITS_NIVEL2 | mmu_pt2(va): los bits altos (20 con 4 KB). */
     return va >> BITS_OFFSET;
 }
 
