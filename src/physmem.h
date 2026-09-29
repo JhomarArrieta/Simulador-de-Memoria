@@ -57,7 +57,6 @@ int physmem_tomar_marco(memoria_fisica_t *mf, uint32_t vpn);
 /* Devuelve un marco a la lista de libres. */
 void physmem_devolver_marco(memoria_fisica_t *mf, int marco);
 
-int      physmem_marco_ocupado(const memoria_fisica_t *mf, int marco);
 uint32_t physmem_vpn_de(const memoria_fisica_t *mf, int marco);
 
 /*

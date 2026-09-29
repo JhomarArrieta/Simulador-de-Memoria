@@ -115,13 +115,6 @@ void physmem_devolver_marco(memoria_fisica_t *mf, int marco)
     mf->num_libres++;
 }
 
-int physmem_marco_ocupado(const memoria_fisica_t *mf, int marco)
-{
-    assert(mf != NULL);
-    assert(marco >= 0 && marco < mf->num_marcos);
-    return mf->marcos[marco].ocupado;
-}
-
 uint32_t physmem_vpn_de(const memoria_fisica_t *mf, int marco)
 {
     assert(mf != NULL);

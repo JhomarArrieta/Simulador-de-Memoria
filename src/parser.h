@@ -45,7 +45,12 @@ typedef struct {
  */
 void parser_parsear_linea(char *linea, comando_t *cmd);
 
-/* Nombre del comando tal como aparece en el archivo de entrada. */
-const char *parser_nombre_comando(tipo_comando_t tipo);
+/*
+ * Convierte un token en un entero sin signo de 32 bits: decimal, o hexadecimal
+ * con prefijo 0x. Devuelve 1 si el token era un numero valido y completo, 0 si
+ * no. Se expone porque los flags de la linea de comandos necesitan exactamente
+ * la misma conversion, incluida la de no interpretar un cero inicial como octal.
+ */
+int parser_leer_uint32(const char *token, uint32_t *destino);
 
 #endif /* PARSER_H */
