@@ -5,14 +5,17 @@ virtual de 32 bits. Reproducible con `./simulador tests/<archivo> -p <lru|fifo>`
 
 ## Las seis corridas
 
-| Test | Política | Accesos | Fallos | Hit rate | Reemplazos | Páginas distintas | Fallos mínimos posibles |
-|---|---|---|---|---|---|---|---|
-| `t1_basico.txt`    | LRU  | 4   | 2   | 50,00 % | 0   | 2   | 2   |
-| `t1_basico.txt`    | FIFO | 4   | 2   | 50,00 % | 0   | 2   | 2   |
-| `t2_localidad.txt` | LRU  | 60  | 4   | 93,33 % | 0   | 4   | 4   |
-| `t2_localidad.txt` | FIFO | 60  | 4   | 93,33 % | 0   | 4   | 4   |
-| `t3_estres.txt`    | LRU  | 400 | 200 | 50,00 % | 136 | 100 | 100 |
-| `t3_estres.txt`    | FIFO | 400 | 200 | 50,00 % | 136 | 100 | 100 |
+| Test | Política | Accesos | Fallos | Hit rate | Reemplazos | AMAT | Páginas distintas | Fallos mínimos |
+|---|---|---|---|---|---|---|---|---|
+| `t1_basico.txt`    | LRU  | 4   | 2   | 50,00 % | 0   | 5 000,10 µs | 2   | 2   |
+| `t1_basico.txt`    | FIFO | 4   | 2   | 50,00 % | 0   | 5 000,10 µs | 2   | 2   |
+| `t2_localidad.txt` | LRU  | 60  | 4   | 93,33 % | 0   | 666,77 µs   | 4   | 4   |
+| `t2_localidad.txt` | FIFO | 60  | 4   | 93,33 % | 0   | 666,77 µs   | 4   | 4   |
+| `t3_estres.txt`    | LRU  | 400 | 200 | 50,00 % | 136 | 5 000,10 µs | 100 | 100 |
+| `t3_estres.txt`    | FIFO | 400 | 200 | 50,00 % | 136 | 5 000,10 µs | 100 | 100 |
+
+AMAT = tiempo medio de acceso, con el modelo de 100 ns por acceso a memoria y 10 ms
+por fallo de página (OSTEP cap. 22.1). Un acceso sin fallos costaría 0,1 µs.
 
 "Fallos mínimos posibles" son los *compulsory misses*: la primera vez que se toca
 una página, ninguna política puede evitar el fallo.

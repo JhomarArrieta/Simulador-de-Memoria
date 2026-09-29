@@ -30,6 +30,15 @@
 /* Bytes que cubre una sola tabla de nivel 2: 1024 paginas * 4 KB = 4 MB. */
 #define BYTES_POR_TABLA_NIVEL2 ((unsigned long) ENTRADAS_NIVEL2 * TAM_PAGINA)
 
+/*
+ * Modelo de tiempo simulado. Se usan los valores tipicos de OSTEP cap. 22.1: un
+ * acceso a memoria cuesta ~100 ns y traer una pagina del disco ~10 ms. No son
+ * inventados, y la diferencia de cinco ordenes de magnitud entre los dos es
+ * justamente lo que hace que un fallo de pagina sea tan caro.
+ */
+#define TIEMPO_ACCESO_MEMORIA_NS 100.0
+#define TIEMPO_FALLO_DISCO_NS    10000000.0 /* 10 ms */
+
 /* El enunciado exige memoria fisica configurable con un minimo de 256 KB. */
 #define MEMORIA_FISICA_KB_DEFECTO 256
 #define MEMORIA_FISICA_KB_MINIMA  256

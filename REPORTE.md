@@ -341,14 +341,14 @@ Reproducible con `./simulador tests/<archivo> -p <lru|fifo>`.
 
 ### 5.1 Las seis corridas
 
-| Test | Política | Accesos | Fallos | Hit rate | Reemplazos | Páginas distintas | Fallos mínimos posibles |
-|---|---|---|---|---|---|---|---|
-| `t1_basico.txt` | LRU | 4 | 2 | 50,00 % | 0 | 2 | 2 |
-| `t1_basico.txt` | FIFO | 4 | 2 | 50,00 % | 0 | 2 | 2 |
-| `t2_localidad.txt` | LRU | 60 | 4 | 93,33 % | 0 | 4 | 4 |
-| `t2_localidad.txt` | FIFO | 60 | 4 | 93,33 % | 0 | 4 | 4 |
-| `t3_estres.txt` | LRU | 400 | 200 | 50,00 % | 136 | 100 | 100 |
-| `t3_estres.txt` | FIFO | 400 | 200 | 50,00 % | 136 | 100 | 100 |
+| Test | Política | Accesos | Fallos | Hit rate | Reemplazos | AMAT | Páginas distintas | Fallos mínimos |
+|---|---|---|---|---|---|---|---|---|
+| `t1_basico.txt` | LRU | 4 | 2 | 50,00 % | 0 | 5 000,10 µs | 2 | 2 |
+| `t1_basico.txt` | FIFO | 4 | 2 | 50,00 % | 0 | 5 000,10 µs | 2 | 2 |
+| `t2_localidad.txt` | LRU | 60 | 4 | 93,33 % | 0 | 666,77 µs | 4 | 4 |
+| `t2_localidad.txt` | FIFO | 60 | 4 | 93,33 % | 0 | 666,77 µs | 4 | 4 |
+| `t3_estres.txt` | LRU | 400 | 200 | 50,00 % | 136 | 5 000,10 µs | 100 | 100 |
+| `t3_estres.txt` | FIFO | 400 | 200 | 50,00 % | 136 | 5 000,10 µs | 100 | 100 |
 
 La última columna son los *compulsory misses*: la primera vez que se toca una
 página, ninguna política puede evitar el fallo. Es la referencia contra la cual se
@@ -454,14 +454,47 @@ patrón cíclico y ambas políticas: mientras falte aunque sea un marco, la pág
 se desaloja es siempre la que se va a necesitar enseguida, y el efecto se propaga en
 cadena por todo el barrido.
 
-### 6.6 El costo oculto: las páginas sucias
+### 6.6 El tiempo: lo que el hit rate no deja ver
+
+El enunciado pide registrar el tiempo además de los fallos y los reemplazos. El
+simulador reporta dos cosas distintas, que no hay que confundir:
+
+- **Tiempo de ejecución (CPU)**: lo que tardó el simulador en esta máquina, medido
+  con `clock()`. Para `t3_estres` es de **0,383 ms**. Solo dice que el simulador es
+  rápido; no dice nada sobre memoria virtual.
+- **Tiempo simulado**: lo que habría tardado el programa simulado, cobrando 100 ns
+  por acceso a memoria y 10 ms por traer una página del disco, que son los valores
+  típicos de OSTEP cap. 22.1. Para `t3_estres` es de **2 000 ms**.
+
+Cinco órdenes de magnitud separan un acceso a memoria de un acceso a disco, y eso
+cambia por completo la lectura de los resultados:
+
+| Test | Hit rate | AMAT (tiempo medio de acceso) | Cuántas veces más lento que los 0,1 µs de un acierto |
+|---|---|---|---|
+| `t2_localidad` | 93,33 % | **666,77 µs** | ~6 668× |
+| `t3_estres` | 50,00 % | **5 000,10 µs** | ~50 001× |
+
+El dato incómodo está en la primera fila: `t2_localidad` tiene un hit rate de
+**93,33 %**, que suena excelente, y sin embargo su acceso promedio cuesta 666 µs, es
+decir **6 668 veces** lo que costaría si no hubiera fallos. Con solo 4 fallos en 60
+accesos. Es la conclusión central del capítulo 22 de OSTEP: como un fallo de página
+cuesta 100 000 veces más que un acierto, el hit rate tiene que ser altísimo —no
+"bueno"— para que el sistema sea usable. Un 93 % de aciertos en una caché de CPU
+sería aceptable; en paginación es un desastre.
+
+Esto también explica por qué un SO real pelea tanto por evitar fallos: no está
+optimizando un porcentaje, está evitando un costo que domina todo lo demás.
+
+### 6.7 El costo oculto: las páginas sucias
 
 De los 136 desalojos de `t3`, **los 136** eran de páginas con `dirty = 1`, porque
 cada página se escribe antes de leerse. En un SO real cada uno de esos desalojos
 exigiría **escribir la página al disco** antes de soltar el marco. El hit rate de
 50 % no captura ese costo: dos políticas con el mismo hit rate pueden tener costos
 de E/S muy distintos según cuántas víctimas estén sucias. El simulador lleva ese
-contador (visible con `-v`) precisamente para poder decirlo con un número.
+contador (visible con `-v`) precisamente para poder decirlo con un número: los 136
+desalojos sucios de `t3_estres` suman **1 360 ms** de escrituras a disco, que se
+sumarían a los 2 000 ms del tiempo simulado.
 
 **[COMPLETAR: si el grupo quiere, comparar los desalojos sucios entre LRU y FIFO en
 un caso donde las políticas difieran, y discutir si el hit rate es la métrica
@@ -631,6 +664,10 @@ All heap blocks were freed -- no leaks are possible
 ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
 ```
 
+El requisito funcional 4 del enunciado ("registrar estadísticas: número de fallos,
+número de reemplazos, tiempo") queda cubierto por completo: los tres se reportan en
+la salida por defecto.
+
 **Separación por responsabilidad**, como pide la rúbrica: parseo (`parser.c`),
 traducción (`mmu.c`), tablas y `alloc`/`free` (`pagetable.c`), marcos (`physmem.c`),
 manejo de fallos (`fallos.c`), reemplazo (`replace.c`), estadísticas (`stats.c`).
@@ -652,7 +689,10 @@ política es `static` privado de su módulo por exigencia de la interfaz.
 - La tabla de dos niveles pasa de 12 400 B a 4 210 792 B según lo disperso que sea
   el uso del espacio virtual; una de un nivel costaría 4 194 304 B siempre.
 - El hit rate no captura el costo de las páginas sucias: 136 de 136 desalojos de
-  `t3` habrían implicado una escritura a disco.
+  `t3` habrían implicado una escritura a disco (1 360 ms adicionales).
+- El hit rate por sí solo engaña: `t2_localidad` acierta el 93,33 % y su acceso
+  promedio sigue costando 6 668 veces lo que costaría sin fallos (AMAT de 666,77 µs
+  contra 0,1 µs).
 
 ## 11. Reparto del trabajo
 

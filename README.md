@@ -88,7 +88,23 @@ Total fallos de página: 4
 Hit rate: 93.33%
 Total reemplazos: 0
 Política: LRU
+Tiempo de ejecución (CPU): 0.039 ms
+Tiempo simulado: 40.006 ms (100 ns por acceso, 10 ms por fallo)
+Tiempo medio de acceso (AMAT): 666.767 µs
 ```
+
+Las cinco primeras líneas son el bloque que especifica el enunciado. Las tres de
+tiempo cumplen su requisito funcional 4 ("registrar estadísticas: número de fallos,
+número de reemplazos, tiempo") y van después para no alterar ese bloque:
+
+- **Tiempo de ejecución (CPU)**: lo que tardó el simulador en esta máquina, medido
+  con `clock()`. Solo dice qué tan rápido es el simulador.
+- **Tiempo simulado**: lo que habría tardado el programa simulado, cobrando 100 ns
+  por acceso a memoria y 10 ms por traer una página del disco (los valores típicos
+  de OSTEP cap. 22.1). Es lo que mide el efecto de la memoria virtual.
+- **AMAT**: tiempo medio por acceso. Con 93,33 % de aciertos el promedio es de
+  666 µs, unas 6 600 veces más lento que un acceso a memoria: un recordatorio de lo
+  caro que es un fallo de página.
 
 Los errores y avisos (accesos ilegales, líneas mal formadas, valores truncados)
 salen por `stderr`, así que `./simulador entrada.txt 2>/dev/null` deja solo el

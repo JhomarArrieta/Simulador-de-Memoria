@@ -3,6 +3,8 @@
  */
 #include "stats.h"
 
+#include "config.h"
+
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
@@ -48,6 +50,33 @@ void stats_registrar_desalojo_sucio(stats_t *s)
     s->desalojos_sucios++;
 }
 
+void stats_registrar_tiempo_cpu(stats_t *s, double segundos)
+{
+    assert(s != NULL);
+    s->tiempo_cpu_seg = segundos;
+}
+
+/*
+ * Tiempo del programa simulado: cada acceso cuesta un acceso a memoria, y cada
+ * fallo cuesta ademas traer la pagina del disco. Se calcula desde los contadores
+ * por la misma razon que los hits: un acumulador paralelo podria desincronizarse.
+ */
+double stats_tiempo_simulado_ns(const stats_t *s)
+{
+    assert(s != NULL);
+    return (double) s->accesos * TIEMPO_ACCESO_MEMORIA_NS
+         + (double) s->fallos  * TIEMPO_FALLO_DISCO_NS;
+}
+
+double stats_amat_ns(const stats_t *s)
+{
+    assert(s != NULL);
+    if (s->accesos == 0) {
+        return 0.0;
+    }
+    return stats_tiempo_simulado_ns(s) / (double) s->accesos;
+}
+
 unsigned long stats_hits(const stats_t *s)
 {
     assert(s != NULL);
@@ -84,6 +113,18 @@ void stats_imprimir_reporte(const stats_t *s, const char *politica)
     printf("Hit rate: %.2f%%\n", stats_hit_rate(s));
     printf("Total reemplazos: %lu\n", s->reemplazos);
     printf("Política: %s\n", politica);
+
+    /*
+     * El requisito funcional 4 del enunciado pide registrar tambien el tiempo.
+     * Van despues de las cinco lineas anteriores para no alterar el bloque
+     * especificado. Son dos cosas distintas: lo que tardo el simulador en esta
+     * maquina, y lo que habria tardado el programa simulado.
+     */
+    printf("Tiempo de ejecución (CPU): %.3f ms\n", s->tiempo_cpu_seg * 1000.0);
+    printf("Tiempo simulado: %.3f ms (%.0f ns por acceso, %.0f ms por fallo)\n",
+           stats_tiempo_simulado_ns(s) / 1e6,
+           TIEMPO_ACCESO_MEMORIA_NS, TIEMPO_FALLO_DISCO_NS / 1e6);
+    printf("Tiempo medio de acceso (AMAT): %.3f µs\n", stats_amat_ns(s) / 1000.0);
 }
 
 void stats_imprimir_detalle(const stats_t *s)
@@ -98,6 +139,8 @@ void stats_imprimir_detalle(const stats_t *s)
     printf("accesos ilegales (valid=0)   : %lu  (no cuentan como acceso)\n", s->ilegales);
     printf("desalojos con la pagina sucia: %lu  (escrituras a disco en un SO real)\n",
            s->desalojos_sucios);
+    printf("costo de esas escrituras      : %.3f ms  (no incluido en el tiempo simulado)\n",
+           (double) s->desalojos_sucios * TIEMPO_FALLO_DISCO_NS / 1e6);
 
     /* Suma de control del enunciado: si esto falla, algun contador miente. */
     printf("suma de control: hits + fallos = %lu %s accesos = %lu\n",

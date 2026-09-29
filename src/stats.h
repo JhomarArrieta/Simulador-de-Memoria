@@ -25,6 +25,10 @@ typedef struct {
      * real y es una diferencia medible entre politicas.
      */
     unsigned long desalojos_sucios;
+
+    /* Tiempo de CPU que tardo la simulacion, en segundos. Es lo unico que no es
+       un conteo: lo mide quien ejecuta el ciclo principal. */
+    double tiempo_cpu_seg;
 } stats_t;
 
 void stats_init(stats_t *s);
@@ -36,8 +40,17 @@ void stats_registrar_reemplazo(stats_t *s);
 void stats_registrar_ilegal(stats_t *s);
 void stats_registrar_desalojo_sucio(stats_t *s);
 
+void stats_registrar_tiempo_cpu(stats_t *s, double segundos);
+
 unsigned long stats_hits(const stats_t *s);
 double        stats_hit_rate(const stats_t *s); /* en porcentaje; 0 si no hubo accesos */
+
+/*
+ * Tiempo que habria tardado el programa simulado, en nanosegundos, y tiempo medio
+ * por acceso (AMAT). Se derivan de los contadores, no se acumulan aparte.
+ */
+double stats_tiempo_simulado_ns(const stats_t *s);
+double stats_amat_ns(const stats_t *s);
 
 /*
  * Las cinco lineas de estadisticas finales que exige el enunciado, en ese orden.

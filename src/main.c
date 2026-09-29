@@ -19,6 +19,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 /*
  * Estado del simulador. Se pasa por parametro en vez de usar variables globales:
@@ -55,6 +56,7 @@ int main(int argc, char *argv[])
 {
     simulador_t sim;
     opciones_t  op;
+    clock_t     inicio;
     int         lineas_malas;
 
     if (!parsear_opciones(argc, argv, &op)) {
@@ -91,7 +93,12 @@ int main(int argc, char *argv[])
         mostrar_configuracion(sim.dir, sim.mem);
     }
 
+    /* clock() es C89/C99 estandar, a diferencia de gettimeofday, que es POSIX y
+       con -std=c99 estricto no estaria declarado. */
+    inicio       = clock();
     lineas_malas = procesar_archivo(&sim, op.ruta);
+    stats_registrar_tiempo_cpu(&sim.stats,
+                               (double) (clock() - inicio) / (double) CLOCKS_PER_SEC);
 
     /* La salida que exige el enunciado; el resto es opcional. */
     stats_imprimir_reporte(&sim.stats, politica_nombre());
