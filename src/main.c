@@ -1,11 +1,14 @@
 /*
  * main.c - ciclo principal del simulador de memoria virtual.
  *
- * Fase 1 (esqueleto): se lee el archivo de entrada linea por linea, se parsea
- * cada comando y se imprime lo que se entendio. Todavia no hay traduccion de
- * direcciones, ni tablas de paginas, ni memoria fisica.
+ * Fase 2: ya existen la tabla de paginas de dos niveles y la memoria fisica, se
+ * crean al arrancar y se destruyen al salir. Los comandos todavia no se ejecutan:
+ * se parsean y se imprimen. La traduccion VA->PA llega en la fase 3.
  */
+#include "config.h"
+#include "pagetable.h"
 #include "parser.h"
+#include "physmem.h"
 
 #include <errno.h>
 #include <inttypes.h>
@@ -14,13 +17,16 @@
 #include <string.h>
 
 static void mostrar_uso(const char *programa);
+static void mostrar_configuracion(const directorio_t *dir, const memoria_fisica_t *mem);
 static int  procesar_archivo(const char *ruta);
 static void descartar_resto_de_linea(FILE *entrada);
 static void mostrar_comando(long numero_linea, const comando_t *cmd);
 
 int main(int argc, char *argv[])
 {
-    int lineas_malas;
+    directorio_t     *dir;
+    memoria_fisica_t *mem;
+    int               lineas_malas;
 
     /* Los flags -p (politica) y -m (memoria fisica) llegan en una fase posterior;
        por ahora el unico argumento es la ruta del archivo de entrada. */
@@ -29,7 +35,27 @@ int main(int argc, char *argv[])
         return EXIT_FAILURE;
     }
 
+    dir = pagetable_crear();
+    if (dir == NULL) {
+        fprintf(stderr, "error: sin memoria para el directorio de paginas\n");
+        return EXIT_FAILURE;
+    }
+
+    mem = physmem_crear(MEMORIA_FISICA_KB_DEFECTO);
+    if (mem == NULL) {
+        fprintf(stderr, "error: no se pudo crear la memoria fisica\n");
+        pagetable_destruir(dir);
+        return EXIT_FAILURE;
+    }
+
+    mostrar_configuracion(dir, mem);
     lineas_malas = procesar_archivo(argv[1]);
+
+    /* Todo lo que se pidio con calloc se libera aqui: valgrind debe salir limpio
+       incluso cuando la corrida termina en error. */
+    physmem_destruir(mem);
+    pagetable_destruir(dir);
+
     if (lineas_malas < 0) {
         return EXIT_FAILURE;
     }
@@ -45,6 +71,33 @@ static void mostrar_uso(const char *programa)
 {
     fprintf(stderr, "uso: %s <archivo_entrada>\n", programa);
     fprintf(stderr, "ejemplo: %s tests/t1_basico.txt\n", programa);
+}
+
+/*
+ * Bloque provisional de la fase 2: deja ver que las estructuras se crearon con el
+ * tamano esperado. Los sizeof salen del compilador, no de una cuenta a mano.
+ */
+static void mostrar_configuracion(const directorio_t *dir, const memoria_fisica_t *mem)
+{
+    unsigned long un_nivel = (unsigned long) PAGINAS_VIRTUALES * sizeof(pte_t);
+
+    printf("=== configuracion ===\n");
+    printf("tamano de pagina  : %u B\n", TAM_PAGINA);
+    printf("espacio virtual   : 32 bits, %u paginas posibles\n", PAGINAS_VIRTUALES);
+    printf("memoria fisica    : %d KB, %d marcos (%d libres)\n",
+           physmem_num_marcos(mem) * (int) (TAM_PAGINA / 1024),
+           physmem_num_marcos(mem), physmem_num_libres(mem));
+    printf("pte_t             : %zu B (pfn 20 b + valid + present + accessed + dirty)\n",
+           sizeof(pte_t));
+    printf("tabla_nivel2_t    : %zu B (%u entradas, cubre %lu B de espacio virtual)\n",
+           sizeof(tabla_nivel2_t), ENTRADAS_NIVEL2, BYTES_POR_TABLA_NIVEL2);
+    printf("directorio_t      : %zu B (%u punteros), tablas de nivel 2 vivas: %zu\n",
+           sizeof(directorio_t), ENTRADAS_NIVEL1, pagetable_tablas_nivel2(dir));
+    printf("marco_t           : %zu B por marco de metadatos\n", sizeof(marco_t));
+    printf("traduccion ahora  : %zu B  (una tabla de un solo nivel costaria %lu B)\n",
+           pagetable_memoria_usada(dir), un_nivel);
+    printf("memoria fisica    : %zu B (datos + metadatos)\n", physmem_memoria_usada(mem));
+    printf("=== comandos ===\n");
 }
 
 /*
